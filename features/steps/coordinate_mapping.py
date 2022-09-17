@@ -1,4 +1,5 @@
 from behave import given, when, then
+from src.controllers import CoordinateTransformer
 
 
 @given("the coordinate transform object")
