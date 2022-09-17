@@ -18,9 +18,11 @@ class CoordinateTransformer(Model):
         self.__output_point_tank.append(point)
         try:
             self._calculate_the_transform_matrix() 
+            self.model_is_changed()
             return True
         except:
             return False
+
 
     def _format_sys_position(self, sys_position) -> np.ndarray:
         return np.concatenate([sys_position, np.ones(shape=(1, sys_position.shape[1]))], axis=0)
@@ -55,3 +57,9 @@ class CoordinateTransformer(Model):
 
     def can_convert(self) -> bool:
         return self._transform_matrix is not None
+
+    def remove_all(self):
+        self.__input_point_tank = []
+        self.__output_point_tank = []
+        self._transform_matrix = None
+        self.model_is_changed()

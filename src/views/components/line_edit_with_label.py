@@ -18,7 +18,13 @@ class LineEditWithLabel(QWidget):
         main_widget.addWidget(self.line_edit)
 
     def get_text(self, return_type=str):
-        return return_type(self.line_edit.text())
+        try:
+            return return_type(self.line_edit.text())
+        except:
+            if return_type == int:
+                return 0
+            else:
+                return ''
 
     def set_text(self, new_text=''):
         self.line_edit.setText(new_text)

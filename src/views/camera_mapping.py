@@ -38,17 +38,30 @@ class CameraMappingSideBar(QWidget):
         self.convert_btn.clicked.connect(self.convert)
         sidebar_widget.addWidget(self.convert_btn)
 
+        self.testing_btn = QPushButton("Testing")
+        sidebar_widget.addWidget(self.testing_btn)
+        self.testing_btn.clicked.connect(self.convert_mode)
+        self.testing_btn.setEnabled(False)
+
+    def convert_mode(self):
+        print("Here")
+        self.controller.change_mode()
+
     def convert(self):
         x = self.x_sys_value.get_text(return_type=int)
         y = self.y_sys_value.get_text(return_type=int)
 
-        result = self.controller.transformer.convert((x, y))
+        result = self.controller.model.transformer.convert((x, y))
         self.x_robot_value.set_text(str(result[0]))
         self.y_robot_value.set_text(str(result[1]))
 
     def model_is_changed(self, model):
-        if model.can_convert:
+        if model.can_convert():
             self.convert_btn.setEnabled(True)
+            self.testing_btn.setEnabled(True)
+        else:
+            self.convert_btn.setEnabled(False)
+            self.testing_btn.setEnabled(False)
 
 
 class CameraMappingMain(QWidget):
@@ -66,6 +79,10 @@ class CameraMappingMain(QWidget):
         self.img = CameraImage(self.controller)
         main_widget.addWidget(self.img)
 
+        clear_btn = QPushButton("Clear")
+        clear_btn.clicked.connect(self.controller.clear_model)
+        main_widget.addWidget(clear_btn)
+    
     def update_image(self, img):
         self.img.setPixmap(img)
 

@@ -3,6 +3,7 @@ from PyQt5.QtGui import QImage
 from .i_observer import IObserver
 from PyQt5.QtCore import Qt
 import cv2 as cv
+from ..models import CoordinateTransformer
 
 
 class WebcamThread(QThread):
@@ -12,6 +13,7 @@ class WebcamThread(QThread):
     def __init__(self):
         QThread.__init__(self)
         self._points = []
+        self.is_draw = True
 
     def run(self):
         self.cam_on = True
@@ -23,10 +25,11 @@ class WebcamThread(QThread):
             if ret: 
                 img = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
                 img = cv.resize(img, self.size)
-                img = self._draw_points(img)
+
+                if self.is_draw:
+                    img = self._draw_points(img)
 
                 img = QImage(img.data, img.shape[1], img.shape[0], QImage.Format_RGB888)
-
 
                 pic = img.scaled(*self.size, Qt.KeepAspectRatio)
                 self.updated_img.emit(pic)
@@ -42,4 +45,7 @@ class WebcamThread(QThread):
         return img
 
     def model_is_changed(self, model):
-        self._points = model.get_all_points()
+        if isinstance(model, CoordinateTransformer):
+            self._points = model.get_all_points()
+        else:
+            self.is_draw = not model.is_testing

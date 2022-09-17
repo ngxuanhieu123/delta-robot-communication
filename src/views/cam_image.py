@@ -49,12 +49,18 @@ class CameraImage(QLabel):
         self.setMouseTracking(True)
         self.controller = controller
         self.message_box = CurrentDialog(self.controller)
+        self.is_testing = False
 
     def mouseMoveEvent(self, event):
         pass
 
     def mousePressEvent(self, event):
-        print(f"({event.x()}, {event.y()})")
-        self.controller.add_point((event.x(), event.y()))
+        if not self.is_testing:
+            self.controller.add_point((event.x(), event.y()))
+            self.message_box.show()
+        else:
+            self.controller.move_to((event.x(), event.y()))
+            print("Here")
 
-        self.message_box.show()
+    def model_is_changed(self, model):
+        self.is_testing = model.is_testing
