@@ -3,5 +3,5 @@ from abc import ABC, abstractmethod
 
 class IObserver(ABC):
     @abstractmethod
-    def update(self) -> None:
+    def model_is_changed(self) -> None:
         pass

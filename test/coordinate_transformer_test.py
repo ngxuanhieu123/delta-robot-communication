@@ -1,6 +1,7 @@
 import unittest
-from src.controllers import CoordinateTransformer
-
+from unittest.mock import Mock
+from src.models import CoordinateTransformer
+from src.views import IObserver
 
 
 class CoordinateTransformerTest(unittest.TestCase):
@@ -43,3 +44,10 @@ class CoordinateTransformerTest(unittest.TestCase):
 
         self.assertTupleEqual((460, 4), result)
 
+    def test_model_is_change(self):
+        observer = Mock(spec=IObserver)
+        self.transformer.add_observer(observer)
+
+        self.transformer.add_observer([(30, 50), (30, 50)])
+
+        observer.model_is_changed.assert_called_once_with(self.transformer) 

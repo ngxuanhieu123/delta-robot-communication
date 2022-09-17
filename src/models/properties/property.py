@@ -1,11 +1,13 @@
 from .i_property import ISetValuableProperty
 from ...views import IObserver
+from ..i_model import Model
 
 
-class Property(ISetValuableProperty):
+class Property(Model, ISetValuableProperty):
     BYTEORDER = 'big'
 
     def __init__(self, num_bytes=2, reverse=False):
+        Model.__init__(self)
         self._value = 0
         self._num_bytes = num_bytes
         self._observers = []
@@ -28,7 +30,7 @@ class Property(ISetValuableProperty):
         self._value = new_value
 
         for observer in self._observers:
-            observer.update(self)
+            observer.model_is_changed(self)
 
     def get_value(self) -> object:
         return self._value

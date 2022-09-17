@@ -103,7 +103,7 @@ class PropertyTest(unittest.TestCase):
 
         test_property.set_value(new_value)
 
-        observer.update.assert_called_once_with(test_property)
+        observer.model_is_changed.assert_called_once_with(test_property)
 
     def test_multiple_observers(self):
         new_value = 4
@@ -117,9 +117,9 @@ class PropertyTest(unittest.TestCase):
 
         test_property.set_value(new_value)
 
-        observer_1.update.assert_called_once_with(test_property)
-        observer_2.update.assert_called_once_with(test_property)
-        observer_3.update.assert_called_once_with(test_property)
+        observer_1.model_is_changed.assert_called_once_with(test_property)
+        observer_2.model_is_changed.assert_called_once_with(test_property)
+        observer_3.model_is_changed.assert_called_once_with(test_property)
 
     def test_remove_observer_function(self):
         new_value = 4
@@ -134,7 +134,7 @@ class PropertyTest(unittest.TestCase):
         test_property.remove_observer(observer_2)
         test_property.set_value(new_value)
 
-        observer_1.update.assert_called_once_with(test_property)
-        observer_2.update.assert_not_called()
-        observer_3.update.assert_called_once_with(test_property)
+        observer_1.model_is_changed.assert_called_once_with(test_property)
+        observer_2.model_is_changed.assert_not_called()
+        observer_3.model_is_changed.assert_called_once_with(test_property)
 
