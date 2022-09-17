@@ -1,17 +1,5 @@
 <commands>
     <command>
-        <name>stop</name>
-        <address>6</address>
-        <parameters></parameters>
-    </command>
-    <command>
-        <name>reset</name>
-        <delay>1000</delay>
-        <address>4</address>
-        <parameters>
-        </parameters>
-    </command>
-    <command>
         <name>control pos</name>
         <address>3</address>
         <delay>1000</delay>
@@ -20,19 +8,19 @@
                 <name>X value (multipled by 1000)</name>
                 <reverse>True</reverse>
                 <index>0</index>
-                <value>212547</value>
+                <value>-70323</value>
             </parameter>
             <parameter>
                 <name>Y value (multipled by 1000)</name>
                 <reverse>True</reverse>
                 <index>1</index>
-                <value>-284395</value>
+                <value>-220522</value>
             </parameter>
             <parameter>
                 <name>Z value (multipled by 1000)</name>
                 <reverse>True</reverse>
                 <index>2</index>
-                <value>-654687</value>
+                <value>-709832</value>
             </parameter>
             <parameter>
                 <name>Speed (multipled by 1000)</name>
@@ -44,26 +32,26 @@
     </command>
     <command>
         <name>control pos</name>
-        <delay>500</delay>
+        <delay>800</delay>
         <address>3</address>
         <parameters>
             <parameter>
                 <name>X value (multipled by 1000)</name>
                 <reverse>True</reverse>
                 <index>0</index>
-                <value>212547</value>
+                <value>-70323</value>
             </parameter>
             <parameter>
                 <name>Y value (multipled by 1000)</name>
                 <reverse>True</reverse>
                 <index>1</index>
-                <value>-284395</value>
+                <value>-220522</value>
             </parameter>
             <parameter>
                 <name>Z value (multipled by 1000)</name>
                 <reverse>True</reverse>
                 <index>2</index>
-                <value>-700000</value>
+                <value>-746704</value>
             </parameter>
             <parameter>
                 <name>Speed (multipled by 1000)</name>
@@ -100,19 +88,19 @@
                 <name>X value (multipled by 1000)</name>
                 <reverse>True</reverse>
                 <index>0</index>
-                <value>212547</value>
+                <value>-70323</value>
             </parameter>
             <parameter>
                 <name>Y value (multipled by 1000)</name>
                 <reverse>True</reverse>
                 <index>1</index>
-                <value>-284395</value>
+                <value>-220522</value>
             </parameter>
             <parameter>
                 <name>Z value (multipled by 1000)</name>
                 <reverse>True</reverse>
                 <index>2</index>
-                <value>-654687</value>
+                <value>-709832</value>
             </parameter>
             <parameter>
                 <name>Speed (multipled by 1000)</name>
@@ -131,19 +119,19 @@
                 <name>X value (multipled by 1000)</name>
                 <reverse>True</reverse>
                 <index>0</index>
-                <value>134</value>
+                <value>311573</value>
             </parameter>
             <parameter>
                 <name>Y value (multipled by 1000)</name>
                 <reverse>True</reverse>
                 <index>1</index>
-                <value>-180</value>
+                <value>-321355</value>
             </parameter>
             <parameter>
                 <name>Z value (multipled by 1000)</name>
                 <reverse>True</reverse>
                 <index>2</index>
-                <value>-708301</value>
+                <value>-708290</value>
             </parameter>
             <parameter>
                 <name>Speed (multipled by 1000)</name>
@@ -169,6 +157,18 @@
                 <reverse>True</reverse>
                 <value>0</value>
             </parameter>
+        </parameters>
+    </command>
+    <command>
+        <name>stop</name>
+        <address>6</address>
+        <parameters></parameters>
+    </command>
+    <command>
+        <name>reset</name>
+        <delay>1000</delay>
+        <address>4</address>
+        <parameters>
         </parameters>
     </command>
 </commands>

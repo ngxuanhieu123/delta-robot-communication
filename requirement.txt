@@ -10,6 +10,7 @@ idna==3.3
 iniconfig==1.1.1
 jedi==0.18.1
 msgpack==1.0.4
+numpy==1.23.3
 packaging==21.3
 parse==1.19.0
 parse-type==0.6.0
