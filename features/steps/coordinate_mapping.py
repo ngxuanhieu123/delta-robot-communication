@@ -9,7 +9,8 @@ def given_the_coordinate_transform_object(context):
 
 @given("the vision's system position ({sys_x}, {sys_y}), the robot's system position ({robot_x}, {robot_y})")
 def given_the_vision_system_position_and_the_robot_system_position(context, sys_x, sys_y, robot_x, robot_y):
-    context.transformer.add_points([(int(sys_x), int(sys_y)), (int(robot_x), int(robot_y))])
+    context.transformer.add_point((int(sys_x), int(sys_y)))
+    context.transformer.add_equivalent_point((int(robot_x), int(robot_y)))
 
 
 @when("the transform system receives the input point ({input_x}, {input_y})")

@@ -1,13 +1,13 @@
 import sys
 from src.views import CameraMapping
+from src.controllers import CameraMappingController
 from PyQt5.QtWidgets import QApplication
-from 
 
 
 def main():
     app = QApplication(sys.argv)
-    win = CameraMapping("ui_files/vision_mapping.ui")
-    win.show()
+    controller = CameraMappingController()
+    controller.show()
     sys.exit(app.exec_())
 
 if __name__ == "__main__":

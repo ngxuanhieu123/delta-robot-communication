@@ -9,10 +9,13 @@ class CoordinateTransformer(Model):
         self.__output_point_tank = []
         self._transform_matrix = None
 
-    def add_points(self, points) -> bool:
-        self.__input_point_tank.append(points[0])
-        self.__output_point_tank.append(points[1])
+    def add_point(self, point) -> bool:
+        if self.can_add_point():
+            self.__input_point_tank.append(point)
+            self.model_is_changed()
 
+    def add_equivalent_point(self, point) -> bool:
+        self.__output_point_tank.append(point)
         try:
             self._calculate_the_transform_matrix() 
             return True
@@ -39,3 +42,16 @@ class CoordinateTransformer(Model):
         transformed_point = np.dot(self._transform_matrix, self._format_sys_position(np.array(point).reshape(2, -1)))
         int_transformed_point = np.asarray(np.round(transformed_point), np.int32)
         return tuple(int_transformed_point.reshape(-1,))
+
+    def get_all_points(self) -> list:
+        return self.__input_point_tank
+
+    def can_add_point(self) -> bool:
+        return len(self.__input_point_tank) == len(self.__output_point_tank)
+
+    def remove_latest_point(self) -> bool:
+        if len(self.__input_point_tank) > 0:
+            self.__input_point_tank = self.__input_point_tank[:-1]
+
+    def can_convert(self) -> bool:
+        return self._transform_matrix is not None

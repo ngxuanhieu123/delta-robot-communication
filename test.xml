@@ -1,16 +1,2 @@
-<commands>
-  <command>
-    <address>4</address>
-    <name>reset</name>
-    <parameters>
-      <parameter>
-        <index>4</index>
-        <value>4</value>
-      </parameter>
-      <parameter>
-        <index>5</index>
-        <value>1</value>
-      </parameter>
-    </parameters>
-  </command>
-</commands>
+<?xml version="1.0" encoding="UTF-8"?>
+<commands></commands>
