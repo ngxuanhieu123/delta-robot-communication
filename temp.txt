@@ -2,6 +2,7 @@
     <command>
         <name>run</name>
         <address>3</address>
+        <delay>1000</delay>
         <parameters>
             <parameter>
                 <index>0</index>

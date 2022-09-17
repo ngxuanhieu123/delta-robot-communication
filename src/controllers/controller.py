@@ -21,3 +21,6 @@ class Controller:
 
     def set_function(self, function):
         self.command.set_function(function)
+
+    def disconnect(self):
+        self.client.close()

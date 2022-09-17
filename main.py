@@ -11,24 +11,11 @@ parser.add_argument("filename", default="process.xml")
 parser.add_argument("--test", "-t", action='store_true')
 parser.add_argument("--host", "-H", default="192.168.27.16")
 parser.add_argument("--port", "-p", type=int, default=502)
+parser.add_argument("--loops", "-l", type=int, default=1)
 args = parser.parse_args()
 
 
-if __name__ == "__main__":
-    if args.test:
-        host = "127.0.0.1"
-        port = 8090
-        thread = Thread(target=binding_server_for, args=(host, port))
-        thread.start()
-    else:
-        host = args.host 
-        port = args.port
-
-    parser = XMLParser(filename=args.filename)
-    controller = Controller(Command())
-    controller.connect(host, port)
-    response = Response()
-
+def control_robot(parser, controller):
     for index, command in enumerate(parser.get_commands_list()):
         controller.command = command
         print(f"""
@@ -48,5 +35,26 @@ if __name__ == "__main__":
             --------------
         """)
 
+
+if __name__ == "__main__":
+    if args.test:
+        host = "127.0.0.1"
+        port = 8090
+        thread = Thread(target=binding_server_for, args=(host, port))
+        thread.start()
+    else:
+        host = args.host 
+        port = args.port
+
+    parser = XMLParser(filename=args.filename)
+    controller = Controller(Command())
+    controller.connect(host, port)
+    response = Response()
+    
+    for i in range(args.loops):
+        control_robot(parser, controller)
+
     if args.test:
         controller.send(b'quit')
+    else:
+        controller.disconnect()
