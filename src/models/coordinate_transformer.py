@@ -38,7 +38,6 @@ class CoordinateTransformer(Model):
         robot_matrix = self._get_robot_matrix()
 
         self._transform_matrix = np.dot(robot_matrix, np.linalg.inv(self._format_sys_position(sys_matrix)))
-        
 
     def convert(self, point) -> tuple:
         transformed_point = np.dot(self._transform_matrix, self._format_sys_position(np.array(point).reshape(2, -1)))

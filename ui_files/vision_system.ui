@@ -74,27 +74,9 @@
             </attribute>
             <layout class="QVBoxLayout" name="verticalLayout_8">
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout_7">
-               <item>
-                <widget class="VisionCameraImage" name="cutting_frame">
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="tab_3">
-            <attribute name="title">
-             <string>Binary Image</string>
-            </attribute>
-            <layout class="QVBoxLayout" name="verticalLayout_10">
-             <item>
               <layout class="QVBoxLayout" name="verticalLayout_9">
                <item>
-                <widget class="VisionCameraImage" name="label_4">
+                <widget class="VisionCameraImage" name="cutting_frame">
                  <property name="text">
                   <string/>
                  </property>
@@ -109,7 +91,80 @@
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_4"/>
+        <layout class="QVBoxLayout" name="verticalLayout_4" stretch="0,0,0,0,8">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="EditableLabel" name="limit_area_label">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="ControllableSlider" name="limit_area_slider">
+             <property name="maximum">
+              <number>3000</number>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QPushButton" name="show_binary_frame_btn">
+           <property name="text">
+            <string>Show the binary frame</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="run_once_btn">
+           <property name="text">
+            <string>Run Once</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="text">
+            <string>Run Continously</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
       </layout>
      </item>
@@ -122,6 +177,16 @@
    <class>VisionCameraImage</class>
    <extends>QLabel</extends>
    <header>src/views</header>
+  </customwidget>
+  <customwidget>
+   <class>EditableLabel</class>
+   <extends>QLabel</extends>
+   <header>src/views/components</header>
+  </customwidget>
+  <customwidget>
+   <class>ControllableSlider</class>
+   <extends>QSlider</extends>
+   <header>src/views/components</header>
   </customwidget>
  </customwidgets>
  <resources/>

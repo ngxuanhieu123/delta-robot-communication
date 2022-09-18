@@ -22,6 +22,7 @@ class Model(IModel):
 
     def add_observer(self, observer:IObserver) -> None:
         self._observers.append(observer)
+        self.model_is_changed()
 
     def remove_observer(self, observer:IObserver) -> None:
         self._observers.remove(observer)

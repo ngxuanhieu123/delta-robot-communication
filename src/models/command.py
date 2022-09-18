@@ -74,5 +74,12 @@ class Command(ICommand):
         else:
             return 0
 
+    def set_delay(self, new_value) -> None:
+        self._delay = new_value
+
     def check_param_reversed(self, index) -> bool:
         return self._params[index].is_reverse()
+
+    def reset_command(self):
+        self._params = [DefaultParam() for _ in range(self.NUM_PARAMS)]
+        self._delay = 0
