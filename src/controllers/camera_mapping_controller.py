@@ -1,7 +1,8 @@
 from ..views import CameraMapping
-from ..models import CoordinateTransformer, Model, Command
 from ..models.properties import Property, DefaultParam
 from .controller import Controller
+
+from ..models import CoordinateTransformer, Model, Command
 
 
 class CameraMappingModel(Model):

@@ -1,9 +1,8 @@
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtGui import QImage
-from .i_observer import IObserver
 from PyQt5.QtCore import Qt
 import cv2 as cv
-from ..models import CoordinateTransformer
+from ..models.coordinate_transformer import CoordinateTransformer
 
 
 class WebcamThread(QThread):
