@@ -40,6 +40,9 @@ class CameraMappingController:
     def clear_model(self):
         self.model.transformer.remove_all()
 
+    def save_weight(self):
+        self.model.transformer.save_weight()
+
     def change_mode(self):
         self.model.toggle_mode()
 

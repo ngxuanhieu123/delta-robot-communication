@@ -1,5 +1,5 @@
 from ..views import VisionWidget
-from ..models import Model, Command
+from ..models import Model, Command, CoordinateTransformer
 from ..models.properties import Property, DefaultParam
 from .controller import Controller
 
@@ -86,6 +86,8 @@ class VisionSystemController:
         self.model.add_observer(self.win.thread)
         self.model.add_observer(self.win.limit_area_label)
         self.model.add_observer(self.win.limit_area_slider)
+        self.transformer = CoordinateTransformer()
+        self.transformer.load_weight()
 
         address_property = Property()
         self.command = Command(address_property=address_property)
@@ -118,16 +120,20 @@ class VisionSystemController:
         self.command.set_param_value(1, 1000 if is_on == True else 0)
 
     def grab_product(self, point):
-        self._command_to_move_command(point[0], point[1], -650000, delay=1000)
+        print(point)
+        point = self.transformer.convert(point)
+        print(point)
+
+        self._command_to_move_command(int(point[0]), int(point[1]), -650000, delay=1000)
         print(self.command.to_hex())
 
-        self._command_to_move_command(point[0], point[1], -750000, delay=500)
+        self._command_to_move_command(int(point[0]), int(point[1]), -750000, delay=500)
         print(self.command.to_hex())
 
         self._command_to_control_out(1)
         print(self.command.to_hex())
 
-        self._command_to_move_command(point[0], point[1], -65000, delay=500)
+        self._command_to_move_command(int(point[0]), int(point[1]), -65000, delay=500)
         print(self.command.to_hex())
 
         self._command_to_move_command(0, 0, -65000, delay=500)

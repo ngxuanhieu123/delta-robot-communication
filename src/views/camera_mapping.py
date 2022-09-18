@@ -43,6 +43,14 @@ class CameraMappingSideBar(QWidget):
         self.testing_btn.clicked.connect(self.convert_mode)
         self.testing_btn.setEnabled(False)
 
+        self.save_weight_btn = QPushButton("Save Weight")
+        sidebar_widget.addWidget(self.save_weight_btn)
+        self.save_weight_btn.clicked.connect(self.save_weight)
+        self.save_weight_btn.setEnabled(False)
+
+    def save_weight(self):
+        self.controller.model.transformer.save_weight()
+
     def convert_mode(self):
         print("Here")
         self.controller.change_mode()
@@ -59,9 +67,11 @@ class CameraMappingSideBar(QWidget):
         if model.can_convert():
             self.convert_btn.setEnabled(True)
             self.testing_btn.setEnabled(True)
+            self.save_weight_btn.setEnabled(True)
         else:
             self.convert_btn.setEnabled(False)
             self.testing_btn.setEnabled(False)
+            self.save_weight_btn.setEnabled(False)
 
 
 class CameraMappingMain(QWidget):

@@ -62,3 +62,9 @@ class CoordinateTransformer(Model):
         self.__output_point_tank = []
         self._transform_matrix = None
         self.model_is_changed()
+
+    def save_weight(self, datafile="data.npy"):
+        np.save(datafile, self._transform_matrix)
+
+    def load_weight(self, datafile="data.npy"):
+        self._transform_matrix = np.load(datafile)
