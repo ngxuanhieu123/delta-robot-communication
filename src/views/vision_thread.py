@@ -20,6 +20,7 @@ class VisionThread(QThread):
         self.controller = None
         self._show_binary_frame = False
         self._limit_area = 0
+        self._binary_threshold = 127
 
     def set_controller(self, controller):
         self.controller = controller
@@ -43,8 +44,8 @@ class VisionThread(QThread):
                 img = self._draw_points(img)
 
                 try:
-                    handled_img = self._hanlded_gray_img(gray_belt)
-                    self._imshow_binary_frame(handled_img)
+                    handled_img, binary_img = self._hanlded_gray_img(gray_belt)
+                    self._imshow_binary_frame(handled_img, binary_img)
                 except Exception as e:
                     print(e)
 
@@ -66,10 +67,11 @@ class VisionThread(QThread):
     def _get_q_image(self, img):
         return QImage(img.data.tobytes(), img.shape[1], img.shape[0], QImage.Format_RGB888)
 
-    def _imshow_binary_frame(self, handled_img):
+    def _imshow_binary_frame(self, handled_img, binary_img):
         if self._show_binary_frame:
             try:
-                cv.imshow("binary frame", handled_img)
+                cv.imshow("binary frame gaussian", handled_img)
+                cv.imshow("binary frame", binary_img)
                 cv.waitKey(1)
             except Exception as e:
                 print(e)
@@ -89,16 +91,19 @@ class VisionThread(QThread):
 
     def _hanlded_gray_img(self, img):
         cutting_img = self._cutting_gray_img(img)
+        _, binary_img = cv.threshold(cutting_img, self._binary_threshold, 255, cv.THRESH_BINARY)
         blur_img = cv.GaussianBlur(cutting_img, (5, 5), 0)
         _, belt = cv.threshold(blur_img, 0, 255, cv.THRESH_BINARY+cv.THRESH_OTSU)
 
         contours, _ = cv.findContours(belt,cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
+        binary_contours, _ = cv.findContours(binary_img, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
 
         self.controller.model.clear_points()
-        for contour in contours:
-            self._get_product(contour)
+        if len(binary_contours) != 0:
+            for contour in contours:
+                self._get_product(contour)
 
-        return belt
+        return belt, binary_img
 
     def _get_product(self, contour):
         min_x, min_y, _, _ = self._get_cutting_value()
@@ -108,6 +113,7 @@ class VisionThread(QThread):
         else:
             c_x = int(moments['m10']/moments['m00']) + min_x
             c_y = int(moments['m01']/moments['m00']) + min_y
+            print(c_x, c_y)
 
             area = cv.contourArea(contour)
 
@@ -147,3 +153,4 @@ class VisionThread(QThread):
         self._points = model.get_points()
         self._show_binary_frame = model.show_binary_frame()
         self._limit_area = model.get_values("limit_area")
+        self._binary_threshold = model.get_values("binary_threshold")

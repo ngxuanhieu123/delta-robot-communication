@@ -4,3 +4,4 @@ from .i_command import *
 from .response import *
 from .coordinate_transformer import *
 from .i_model import *
+from .trajectory_prediction import TrajectoryPredictor

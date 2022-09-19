@@ -55,11 +55,3 @@ class CoordinateTransformerTest(unittest.TestCase):
         result = self.transformer.convert((230, 2))
 
         self.assertTupleEqual((460, 4), result)
-
-    def test_model_is_change(self):
-        observer = Mock(spec=IObserver)
-        self.transformer.add_observer(observer)
-
-        self.transformer.add_point((30, 30))
-
-        observer.model_is_changed.assert_called_once_with(self.transformer) 

@@ -15,7 +15,8 @@ class VisionSystemModel(Model):
         self._points = []
         self._show_binary_frame = False
         self._values = {
-            "limit_area": 700
+            "limit_area": 700,
+            "binary_threshold": 200
         }
         self._grab_loop = False
 
@@ -99,6 +100,8 @@ class VisionSystemController:
         self.model.add_observer(self.win.thread)
         self.model.add_observer(self.win.limit_area_label)
         self.model.add_observer(self.win.limit_area_slider)
+        self.model.add_observer(self.win.binary_threshold_label)
+        self.model.add_observer(self.win.binary_threshold_slider)
         self.transformer = CoordinateTransformer()
         self.transformer.load_weight()
 
@@ -107,7 +110,10 @@ class VisionSystemController:
         self.connection_controller = Controller(command=self.command)
         self.command.reset_command()
 
-        self.connection_controller.connect("192.168.27.16", 502)
+        try:
+            self.connection_controller.connect("192.168.27.16", 502)
+        except Exception as e:
+            print(e)
 
         self.grap_loop = True
 
