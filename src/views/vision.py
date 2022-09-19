@@ -4,6 +4,7 @@ from .vision_camera_image import VisionCameraImage
 from .vision_thread import VisionThread
 from PyQt5.uic import loadUi
 from .components import EditableLabel, ControllableSlider
+from threading import Thread
 
 
 
@@ -48,6 +49,7 @@ class VisionWidget(QWidget):
 
     def grab_obj(self):
         try:
-            self.controller.grab_product(self.controller.model.get_points()[0])
+            thread = Thread(target=self.controller.grab_product, args=(self.controller.model.get_points()[0], ))
+            thread.start()
         except Exception as e:
             print(e)

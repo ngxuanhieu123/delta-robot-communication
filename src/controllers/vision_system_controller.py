@@ -127,6 +127,7 @@ class VisionSystemController:
         self.command.set_param(4, Property(num_bytes=4, reverse=True))
         self.command.set_param_value(4, speed)
         self.command.set_delay(delay)
+        self.connection_controller.send(self.command.to_hex())
 
     def _command_to_control_out(self, out_num, is_on=True):
         self.command.reset_command()
@@ -135,6 +136,7 @@ class VisionSystemController:
         self.command.set_param_value(0, out_num * 1000)
         self.command.set_param(1, Property(num_bytes=4, reverse=True))
         self.command.set_param_value(1, 1000 if is_on == True else 0)
+        self.connection_controller.send(self.command.to_hex())
 
 
     def grab_product(self, point):
@@ -144,27 +146,21 @@ class VisionSystemController:
 
         self._command_to_move_command(int(point[0]), int(point[1]), -650000, delay=1000)
         print(self.command.to_hex())
-        self.connection_controller.send(self.command.to_hex())
 
-        self._command_to_move_command(int(point[0]), int(point[1]), -750000, delay=1000)
+        self._command_to_move_command(int(point[0]), int(point[1]), -775000, delay=1000)
         print(self.command.to_hex())
-        self.connection_controller.send(self.command.to_hex())
 
         self._command_to_control_out(1)
         print(self.command.to_hex())
-        self.connection_controller.send(self.command.to_hex())
 
         self._command_to_move_command(int(point[0]), int(point[1]), -650000, delay=500)
         print(self.command.to_hex())
-        self.connection_controller.send(self.command.to_hex())
 
         self._command_to_move_command(0, 0, -650000, delay=1000)
         print(self.command.to_hex())
-        self.connection_controller.send(self.command.to_hex())
 
         self._command_to_control_out(1, is_on=False)
         print(self.command.to_hex())
-        self.connection_controller.send(self.command.to_hex())
 
     def grab(self):
         remain, point = self.model.get_point()
