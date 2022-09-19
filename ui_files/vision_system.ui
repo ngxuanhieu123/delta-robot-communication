@@ -145,9 +145,9 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="run_continuously">
            <property name="text">
-            <string>Run Continously</string>
+            <string>Run Continuously</string>
            </property>
           </widget>
          </item>

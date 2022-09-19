@@ -1,6 +1,7 @@
 from .i_command import ICommand
 from ..models.properties import IProperty, FrameHeaderProperty, DefaultParam, ISetValuableProperty
 from ..utils.exceptions import ChangeNonChangaleProperty
+from ..utils import Delay
 from copy import deepcopy
 
 
@@ -75,11 +76,11 @@ class Command(ICommand):
             return 0
 
     def set_delay(self, new_value) -> None:
-        self._delay = new_value
+        self._delay = Delay(new_value)
 
     def check_param_reversed(self, index) -> bool:
         return self._params[index].is_reverse()
 
     def reset_command(self):
         self._params = [DefaultParam() for _ in range(self.NUM_PARAMS)]
-        self._delay = 0
+        self._delay = None

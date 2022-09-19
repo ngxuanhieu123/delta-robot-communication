@@ -14,11 +14,11 @@ class XMLParser:
     def _get_command_from_element(self, element):
         address_property = Property()
 
+        command = Command(address_property=address_property, 
+                    params=[DefaultParam() for _ in range(Command.NUM_PARAMS)])
+
         if element.find("delay") is not None:
-            command = Command(address_property=address_property, 
-                    params=[DefaultParam() for _ in range(Command.NUM_PARAMS)], delay=Delay(int(element.find("delay").text)))
-        else:
-            command = Command(address_property=address_property, params=[DefaultParam() for _ in range(Command.NUM_PARAMS)])
+            command.set_delay(int(element.find("delay").text))
 
         if element.find("name") is not None:
             command.set_name(element.find("name").text)

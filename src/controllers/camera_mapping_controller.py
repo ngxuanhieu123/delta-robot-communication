@@ -15,6 +15,11 @@ class CameraMappingModel(Model):
         self.is_testing = not self.is_testing
         self.model_is_changed()
 
+    def load_weight(self):
+        self.transformer.load_weight()
+        print(self.transformer._transform_matrix)
+        self.model_is_changed()
+
 
 class CameraMappingController:
     def __init__(self):
@@ -46,6 +51,9 @@ class CameraMappingController:
     def change_mode(self):
         self.model.toggle_mode()
 
+    def load_weight(self):
+        self.model.load_weight()
+
     def move_to(self, point):
         result = self.model.transformer.convert(point)
         address_property = Property()
@@ -56,13 +64,13 @@ class CameraMappingController:
         command.set_param(1, Property(num_bytes=4, reverse=True))
         command.set_param_value(1, int(result[1]))
         command.set_param(2, Property(num_bytes=4, reverse=True))
-        command.set_param_value(2, -70000)
+        command.set_param_value(2, -700000)
         command.set_param(4, Property(num_bytes=4, reverse=True))
         command.set_param_value(4, 1000)
 
         controller = Controller(command=command)
 
         print(controller.command.to_hex())
-#        controller.connect("192.168.27.16", 502)
-#        controller.send(controller.command.to_hex())
-#        controller.disconnect()
+        controller.connect("192.168.27.16", 502)
+        controller.send(controller.command.to_hex())
+        controller.disconnect()

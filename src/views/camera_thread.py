@@ -17,7 +17,7 @@ class WebcamThread(QThread):
     def run(self):
         self.cam_on = True
 
-        capture = cv.VideoCapture(0)
+        capture = cv.VideoCapture(1)
 
         while self.cam_on:
             ret, frame = capture.read()

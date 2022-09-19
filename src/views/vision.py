@@ -47,4 +47,7 @@ class VisionWidget(QWidget):
         self.cutting_frame.setPixmap(QPixmap.fromImage(image))
 
     def grab_obj(self):
-        self.controller.grab_product(self.controller.model.get_points()[0])
+        try:
+            self.controller.grab_product(self.controller.model.get_points()[0])
+        except Exception as e:
+            print(e)

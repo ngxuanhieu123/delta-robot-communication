@@ -9,8 +9,8 @@ from .components import LineEditWithLabel
 class CameraMappingSideBar(QWidget):
     def __init__(self, controller):
         super().__init__()
-        self.initUi()
         self.controller = controller
+        self.initUi()
 
     def initUi(self):
         sidebar_widget = QVBoxLayout(self)
@@ -47,6 +47,10 @@ class CameraMappingSideBar(QWidget):
         sidebar_widget.addWidget(self.save_weight_btn)
         self.save_weight_btn.clicked.connect(self.save_weight)
         self.save_weight_btn.setEnabled(False)
+
+        self.load_weight_btn = QPushButton("Load Weight")
+        sidebar_widget.addWidget(self.load_weight_btn)
+        self.load_weight_btn.clicked.connect(self.controller.load_weight)
 
     def save_weight(self):
         self.controller.model.transformer.save_weight()
