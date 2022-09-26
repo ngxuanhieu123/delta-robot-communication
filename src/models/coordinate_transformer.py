@@ -68,3 +68,9 @@ class CoordinateTransformer(Model):
 
     def load_weight(self, datafile="data.npy"):
         self._transform_matrix = np.load(datafile)
+
+    def set_weight(self, weight):
+        self._transform_matrix = np.array(weight)
+
+    def get_matrix(self):
+        return self._transform_matrix

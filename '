@@ -1,0 +1,39 @@
+from PyQt5.uic import loadUi
+from PyQt5.QtWidgets import QDialog, QDoubleSpinBox, QVBoxLayout, QDialogButtonBox
+
+
+
+class RobotPositionDialog(QDialog):
+    def __init__(self, controller):
+        super().__init__()
+        self.controller = controller
+        self.initUi()
+        self.setWindowTitle("Robot Position")
+
+    def initUi(self):
+        main_widget = QVBoxLayout(self)
+
+        input_widget = QHBoxLayout(self)
+        main_widget.addLayout(input_widget)
+
+        buttons = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        buttons.accepted.connect(self.add_equivalent_point)
+        buttons.rejected.connect(self.remove_latest_point)
+        main_widget.addWidget(buttons)
+
+        self.x_value = QDoubleSpinBox()
+        input_widget.addWidget(self.x_value)
+
+        self.y_value = QDoubleSpinBox()
+        input_widget.addWidget(self.y_value)
+
+    def add_equivalent_point(self):
+        robot_mapping_points = self.controller.model.get_value("robot_mapping_points")
+        mapping_points = self.controller.model.get_value("mapping_points")
+
+        if len(mapping_points) > len(robot_mapping_points):
+            x = self.x_value.value()
+            y = self.y_value.value()
+            robot_mapping_points.append([x, y])
+            self.controller.model.set_value("robot_mapping_points", robot_mapping_points)
+        self.close()

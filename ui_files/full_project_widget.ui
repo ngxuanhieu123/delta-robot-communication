@@ -1,0 +1,1819 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>966</width>
+    <height>467</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Vision App</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTabWidget" name="tabWidget">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="tab_3">
+        <attribute name="title">
+         <string>Vision</string>
+        </attribute>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1">
+           <item>
+            <widget class="VisionCameraLabel" name="vision_camera_label">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="gridLayout_20">
+             <item row="0" column="0">
+              <widget class="QGroupBox" name="groupBox_9">
+               <property name="title">
+                <string>Cutting frame</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_22">
+                <item row="0" column="0">
+                 <layout class="QFormLayout" name="formLayout_15">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_40">
+                    <property name="text">
+                     <string>X min</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_41">
+                    <property name="text">
+                     <string>x max</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label_42">
+                    <property name="text">
+                     <string>Y min</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="label_43">
+                    <property name="text">
+                     <string>Y max</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="CuttingFrameSpinBox" name="cutting_frame_x_min">
+                    <property name="maximum">
+                     <number>1000</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="CuttingFrameSpinBox" name="cutting_frame_x_max">
+                    <property name="maximum">
+                     <number>1000</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="CuttingFrameSpinBox" name="cutting_frame_y_min">
+                    <property name="maximum">
+                     <number>1000</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="CuttingFrameSpinBox" name="cutting_frame_y_max">
+                    <property name="maximum">
+                     <number>1000</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="label_49">
+                    <property name="text">
+                     <string>Color</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="ComboBox" name="cutting_frame_color"/>
+                  </item>
+                  <item row="5" column="0">
+                   <widget class="QLabel" name="label_53">
+                    <property name="text">
+                     <string>Width</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="1">
+                   <widget class="SpinBox" name="cutting_frame_thickness">
+                    <property name="minimum">
+                     <number>1</number>
+                    </property>
+                    <property name="maximum">
+                     <number>5</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="0">
+                   <widget class="QLabel" name="label_54">
+                    <property name="text">
+                     <string>Point Color</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="1">
+                   <widget class="ComboBox" name="center_point_color"/>
+                  </item>
+                 </layout>
+                </item>
+                <item row="1" column="0">
+                 <layout class="QGridLayout" name="gridLayout_23">
+                  <item row="0" column="1">
+                   <widget class="QPushButton" name="show_binary_frame_btn">
+                    <property name="text">
+                     <string>Show Binary</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QPushButton" name="new_cutting_frame_btn">
+                    <property name="text">
+                     <string>New</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QGroupBox" name="groupBox_12">
+               <property name="title">
+                <string>Center Detection Filter</string>
+               </property>
+               <layout class="QVBoxLayout" name="verticalLayout_10">
+                <item>
+                 <layout class="QFormLayout" name="formLayout_16">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_55">
+                    <property name="text">
+                     <string>Binary Threshold</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="SpinBox" name="binary_threshold">
+                    <property name="maximum">
+                     <number>255</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_56">
+                    <property name="text">
+                     <string>Area Threshold</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="SpinBox" name="area_threshold">
+                    <property name="maximum">
+                     <number>3000</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label_16">
+                    <property name="text">
+                     <string>Contour Kernel</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="ComboBox" name="contour_kernel"/>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="label_57">
+                    <property name="text">
+                     <string>Catch line</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="SpinBox" name="catch_line"/>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="label_58">
+                    <property name="text">
+                     <string>Line direction</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="ComboBox" name="line_direction"/>
+                  </item>
+                  <item row="5" column="0">
+                   <widget class="QLabel" name="label_59">
+                    <property name="text">
+                     <string>Catching Line Color</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="1">
+                   <widget class="ComboBox" name="catching_line_color"/>
+                  </item>
+                  <item row="6" column="1">
+                   <widget class="QPushButton" name="run_btn">
+                    <property name="text">
+                     <string>Run</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="0">
+                   <widget class="QLabel" name="label_69">
+                    <property name="text">
+                     <string>Run</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="7" column="0">
+                   <widget class="QLabel" name="label_70">
+                    <property name="text">
+                     <string>Reset</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="7" column="1">
+                   <widget class="QPushButton" name="reset_btn">
+                    <property name="text">
+                     <string>Reset</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QGroupBox" name="groupBox_15">
+               <property name="title">
+                <string>Adaptive</string>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_18">
+                <item>
+                 <layout class="QFormLayout" name="formLayout_24">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_12">
+                    <property name="text">
+                     <string>Adpat X</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="SpinBox" name="adapt_x">
+                    <property name="minimum">
+                     <number>-1000</number>
+                    </property>
+                    <property name="maximum">
+                     <number>1000</number>
+                    </property>
+                    <property name="singleStep">
+                     <number>10</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_60">
+                    <property name="text">
+                     <string>Moving Speed</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="SpinBox" name="moving_speed">
+                    <property name="maximum">
+                     <number>2000</number>
+                    </property>
+                    <property name="singleStep">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label_61">
+                    <property name="text">
+                     <string>Grabbing Speed</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="SpinBox" name="grabbing_speed">
+                    <property name="maximum">
+                     <number>2000</number>
+                    </property>
+                    <property name="singleStep">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="label_62">
+                    <property name="text">
+                     <string>Moving Delay</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="SpinBox" name="moving_delay">
+                    <property name="maximum">
+                     <number>2000</number>
+                    </property>
+                    <property name="singleStep">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="label_63">
+                    <property name="text">
+                     <string>Grabbing Delay</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="SpinBox" name="grabbing_delay">
+                    <property name="maximum">
+                     <number>2000</number>
+                    </property>
+                    <property name="singleStep">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <layout class="QFormLayout" name="formLayout_25">
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_64">
+                 <property name="text">
+                  <string>Z low</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="DoubleSpinBox" name="z_val_low">
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-900.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>-500.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>10.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="label_65">
+                 <property name="text">
+                  <string>Z high</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="DoubleSpinBox" name="z_val_high">
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-900.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>-500.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>10.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="0">
+                <widget class="QLabel" name="label_66">
+                 <property name="text">
+                  <string>X target</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="label_67">
+                 <property name="text">
+                  <string>Y target</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="0">
+                <widget class="QLabel" name="label_68">
+                 <property name="text">
+                  <string>Z target</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="DoubleSpinBox" name="x_val_target">
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-500.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>500.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>10.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="DoubleSpinBox" name="y_val_target">
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-500.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>500.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>10.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="DoubleSpinBox" name="z_val_target">
+                 <property name="decimals">
+                  <number>3</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-900.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>-500.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>10.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab_4">
+        <attribute name="title">
+         <string>Control</string>
+        </attribute>
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
+         <item>
+          <layout class="QGridLayout" name="gridLayout" rowstretch="2,2" columnstretch="2,2">
+           <item row="0" column="0">
+            <widget class="QGroupBox" name="groupBox_2">
+             <property name="title">
+              <string>Control Directly</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_3">
+              <item row="1" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_3">
+                <item>
+                 <layout class="QFormLayout" name="formLayout">
+                  <item row="0" column="0">
+                   <widget class="QLabel" name="label_2">
+                    <property name="text">
+                     <string>Current X</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="DoubleSpinBox" name="current_x">
+                    <property name="decimals">
+                     <number>3</number>
+                    </property>
+                    <property name="minimum">
+                     <double>-400.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>400.000000000000000</double>
+                    </property>
+                    <property name="singleStep">
+                     <double>0.010000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QLabel" name="label_3">
+                    <property name="text">
+                     <string>Current Y</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="DoubleSpinBox" name="current_y">
+                    <property name="decimals">
+                     <number>3</number>
+                    </property>
+                    <property name="minimum">
+                     <double>-400.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>400.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QLabel" name="label_4">
+                    <property name="text">
+                     <string>Current Z</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="DoubleSpinBox" name="current_z">
+                    <property name="decimals">
+                     <number>3</number>
+                    </property>
+                    <property name="minimum">
+                     <double>-900.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>-600.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QLabel" name="label_5">
+                    <property name="text">
+                     <string>Speed</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="DoubleSpinBox" name="speed">
+                    <property name="decimals">
+                     <number>3</number>
+                    </property>
+                    <property name="maximum">
+                     <double>2.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QLabel" name="label_6">
+                    <property name="text">
+                     <string>X min</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="DoubleSpinBox" name="x_min">
+                    <property name="decimals">
+                     <number>3</number>
+                    </property>
+                    <property name="minimum">
+                     <double>-500.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>-200.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="0">
+                   <widget class="QLabel" name="label_7">
+                    <property name="text">
+                     <string>X max</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="1">
+                   <widget class="DoubleSpinBox" name="x_max">
+                    <property name="decimals">
+                     <number>3</number>
+                    </property>
+                    <property name="minimum">
+                     <double>200.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>500.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="0">
+                   <widget class="QLabel" name="label_8">
+                    <property name="text">
+                     <string>Y min</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="1">
+                   <widget class="DoubleSpinBox" name="y_min">
+                    <property name="decimals">
+                     <number>3</number>
+                    </property>
+                    <property name="minimum">
+                     <double>-500.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>-200.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="7" column="0">
+                   <widget class="QLabel" name="label_9">
+                    <property name="text">
+                     <string>Y max</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="7" column="1">
+                   <widget class="DoubleSpinBox" name="y_max">
+                    <property name="decimals">
+                     <number>3</number>
+                    </property>
+                    <property name="minimum">
+                     <double>200.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>500.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="0">
+                   <widget class="QLabel" name="label_10">
+                    <property name="text">
+                     <string>Z min</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="8" column="1">
+                   <widget class="DoubleSpinBox" name="z_min">
+                    <property name="decimals">
+                     <number>3</number>
+                    </property>
+                    <property name="minimum">
+                     <double>-900.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>-800.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="9" column="0">
+                   <widget class="QLabel" name="label_11">
+                    <property name="text">
+                     <string>Z max</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="9" column="1">
+                   <widget class="DoubleSpinBox" name="z_max">
+                    <property name="decimals">
+                     <number>3</number>
+                    </property>
+                    <property name="minimum">
+                     <double>-700.000000000000000</double>
+                    </property>
+                    <property name="maximum">
+                     <double>-600.000000000000000</double>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="10" column="0">
+                   <widget class="QLabel" name="label_18">
+                    <property name="text">
+                     <string>Encoder Value</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="10" column="1">
+                   <widget class="DoubleSpinBox" name="encoder_value">
+                    <property name="decimals">
+                     <number>3</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QGridLayout" name="gridLayout_2" rowstretch="0,0,0,0,0,0">
+                  <item row="1" column="1">
+                   <widget class="QPushButton" name="move_robot_btn">
+                    <property name="text">
+                     <string>Run</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="0">
+                   <widget class="QPushButton" name="increase_z_val_btn">
+                    <property name="text">
+                     <string>Increase Z</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="1">
+                   <widget class="QPushButton" name="decrease_x_val_btn">
+                    <property name="text">
+                     <string>Decrease X</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="4" column="1">
+                   <widget class="QPushButton" name="decrease_z_val_btn">
+                    <property name="text">
+                     <string>Decrease Z</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="1">
+                   <widget class="QPushButton" name="decrease_y_val_btn">
+                    <property name="text">
+                     <string>Decrease Y</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QPushButton" name="move_home_btn">
+                    <property name="text">
+                     <string>Origin</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="1">
+                   <widget class="QPushButton" name="pushButton_10">
+                    <property name="text">
+                     <string>Read Encoder</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="0">
+                   <widget class="QPushButton" name="toggle_out_btn">
+                    <property name="text">
+                     <string>Toggle Out 1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="3" column="0">
+                   <widget class="QPushButton" name="increase_y_val_btn">
+                    <property name="text">
+                     <string>Increase Y</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QPushButton" name="increase_x_val_btn">
+                    <property name="text">
+                     <string>Increase X</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <layout class="QFormLayout" name="formLayout_4">
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_20">
+                      <property name="text">
+                       <string>Origin X</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="DoubleSpinBox" name="origin_x">
+                      <property name="decimals">
+                       <number>3</number>
+                      </property>
+                      <property name="minimum">
+                       <double>-5.000000000000000</double>
+                      </property>
+                      <property name="maximum">
+                       <double>5.000000000000000</double>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="0">
+                     <widget class="QLabel" name="label_21">
+                      <property name="text">
+                       <string>Origin Y</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="0">
+                     <widget class="QLabel" name="label_22">
+                      <property name="text">
+                       <string>Origin Z</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="1" column="1">
+                     <widget class="DoubleSpinBox" name="origin_y">
+                      <property name="decimals">
+                       <number>3</number>
+                      </property>
+                      <property name="minimum">
+                       <double>-5.000000000000000</double>
+                      </property>
+                      <property name="maximum">
+                       <double>5.000000000000000</double>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="2" column="1">
+                     <widget class="DoubleSpinBox" name="origin_z">
+                      <property name="decimals">
+                       <number>3</number>
+                      </property>
+                      <property name="minimum">
+                       <double>-750.000000000000000</double>
+                      </property>
+                      <property name="maximum">
+                       <double>-650.000000000000000</double>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QGroupBox" name="groupBox">
+             <property name="title">
+              <string>Configuration</string>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_8">
+              <item>
+               <layout class="QFormLayout" name="formLayout_2">
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_13">
+                  <property name="text">
+                   <string>Image size</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="ComboBox" name="image_size"/>
+                </item>
+                <item row="2" column="0">
+                 <widget class="QLabel" name="label_14">
+                  <property name="text">
+                   <string>Load Config</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <layout class="QHBoxLayout" name="horizontalLayout_11">
+                  <item>
+                   <widget class="QPushButton" name="load_config_btn">
+                    <property name="text">
+                     <string>Load</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="Label" name="config_file">
+                    <property name="text">
+                     <string>Emtpy</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
+                </item>
+                <item row="3" column="1">
+                 <layout class="QHBoxLayout" name="horizontalLayout_6">
+                  <item>
+                   <spacer name="horizontalSpacer_2">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="save_config_btn">
+                    <property name="text">
+                     <string>Save</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item row="0" column="1">
+                 <layout class="QHBoxLayout" name="horizontalLayout_16"/>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QGroupBox" name="groupBox_4">
+             <property name="title">
+              <string>Filter Configuration</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_3">
+              <item>
+               <layout class="QFormLayout" name="formLayout_3">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_15">
+                  <property name="text">
+                   <string>Filter Kernel</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QComboBox" name="comboBox_4"/>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_17">
+                  <property name="text">
+                   <string>Kernel</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="ComboBox" name="kernel"/>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QGroupBox" name="groupBox_3">
+             <property name="title">
+              <string>Mapping</string>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_9">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="3,1">
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1">
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_10">
+                    <item>
+                     <widget class="QPushButton" name="pushButton_11">
+                      <property name="text">
+                       <string>Clear Weight</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="pushButton_12">
+                      <property name="text">
+                       <string>Remove Latest</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="pushButton_16">
+                      <property name="text">
+                       <string>Add points</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_6" stretch="0,0,0,0">
+                  <item>
+                   <widget class="QGroupBox" name="groupBox_5">
+                    <property name="title">
+                     <string>Weight</string>
+                    </property>
+                    <layout class="QGridLayout" name="gridLayout_5">
+                     <item row="0" column="0">
+                      <layout class="QGridLayout" name="gridLayout_4">
+                       <item row="0" column="1">
+                        <widget class="QDoubleSpinBox" name="doubleSpinBox_14"/>
+                       </item>
+                       <item row="1" column="0">
+                        <widget class="QDoubleSpinBox" name="doubleSpinBox_13"/>
+                       </item>
+                       <item row="0" column="0">
+                        <widget class="QDoubleSpinBox" name="doubleSpinBox_12"/>
+                       </item>
+                       <item row="0" column="2">
+                        <widget class="QDoubleSpinBox" name="doubleSpinBox_15"/>
+                       </item>
+                       <item row="1" column="1">
+                        <widget class="QDoubleSpinBox" name="doubleSpinBox_16"/>
+                       </item>
+                       <item row="1" column="2">
+                        <widget class="QDoubleSpinBox" name="doubleSpinBox_17"/>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_13">
+                    <item>
+                     <widget class="QPushButton" name="pushButton_15">
+                      <property name="text">
+                       <string>Testing</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="pushButton_14">
+                      <property name="text">
+                       <string>Convert</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_14">
+                    <item>
+                     <widget class="QPushButton" name="pushButton">
+                      <property name="text">
+                       <string>Toggle Cam</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="pushButton_13">
+                      <property name="text">
+                       <string>PushButton</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <widget class="QGroupBox" name="groupBox_6">
+                    <property name="title">
+                     <string>GroupBox</string>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_8">
+                     <item>
+                      <layout class="QVBoxLayout" name="verticalLayout_7">
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_12">
+                         <item>
+                          <layout class="QFormLayout" name="formLayout_6">
+                           <item row="0" column="0">
+                            <widget class="QLabel" name="label_23">
+                             <property name="text">
+                              <string>X cam</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="0" column="1">
+                            <widget class="QDoubleSpinBox" name="doubleSpinBox_3"/>
+                           </item>
+                           <item row="1" column="0">
+                            <widget class="QLabel" name="label_25">
+                             <property name="text">
+                              <string>Y cam</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="1">
+                            <widget class="QDoubleSpinBox" name="doubleSpinBox_5"/>
+                           </item>
+                          </layout>
+                         </item>
+                         <item>
+                          <layout class="QFormLayout" name="formLayout_5">
+                           <item row="0" column="0">
+                            <widget class="QLabel" name="label_24">
+                             <property name="text">
+                              <string>X robot</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="0" column="1">
+                            <widget class="QDoubleSpinBox" name="doubleSpinBox_4"/>
+                           </item>
+                           <item row="1" column="0">
+                            <widget class="QLabel" name="label_26">
+                             <property name="text">
+                              <string>Y Robot</string>
+                             </property>
+                            </widget>
+                           </item>
+                           <item row="1" column="1">
+                            <widget class="QDoubleSpinBox" name="doubleSpinBox_6"/>
+                           </item>
+                          </layout>
+                         </item>
+                        </layout>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tab">
+        <attribute name="title">
+         <string>Mapping</string>
+        </attribute>
+        <layout class="QHBoxLayout" name="horizontalLayout_15">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="1,1">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0">
+             <item>
+              <widget class="CameraLabel" name="mapping_camera_label">
+               <property name="text">
+                <string/>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QGridLayout" name="gridLayout_6">
+             <item row="3" column="0">
+              <layout class="QGridLayout" name="gridLayout_11">
+               <item row="0" column="0">
+                <widget class="QGroupBox" name="groupBox_10">
+                 <property name="title">
+                  <string>Mapping points</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_13">
+                  <item row="0" column="0">
+                   <layout class="QGridLayout" name="gridLayout_12">
+                    <item row="1" column="0">
+                     <layout class="QFormLayout" name="formLayout_13">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_33">
+                        <property name="text">
+                         <string>Img Y</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="DisplayPointSpinBox" name="img_1_0">
+                        <property name="maximum">
+                         <number>500</number>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                    <item row="0" column="0">
+                     <layout class="QFormLayout" name="formLayout_14">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_32">
+                        <property name="text">
+                         <string>Img X</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="DisplayPointSpinBox" name="img_0_0">
+                        <property name="maximum">
+                         <number>500</number>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                    <item row="0" column="1">
+                     <layout class="QFormLayout" name="formLayout_17">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_34">
+                        <property name="text">
+                         <string>Robot X</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="DisplayPointDoubleSpinBox" name="robot_0_0">
+                        <property name="decimals">
+                         <number>3</number>
+                        </property>
+                        <property name="minimum">
+                         <double>-400.000000000000000</double>
+                        </property>
+                        <property name="maximum">
+                         <double>400.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                    <item row="1" column="1">
+                     <layout class="QFormLayout" name="formLayout_18">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_35">
+                        <property name="text">
+                         <string>Robot Y</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="DisplayPointDoubleSpinBox" name="robot_1_0">
+                        <property name="decimals">
+                         <number>3</number>
+                        </property>
+                        <property name="minimum">
+                         <double>-400.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QGroupBox" name="groupBox_14">
+                 <property name="title">
+                  <string>Mapping points</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_19">
+                  <item row="0" column="0">
+                   <layout class="QGridLayout" name="gridLayout_18">
+                    <item row="1" column="0">
+                     <layout class="QFormLayout" name="formLayout_35">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_50">
+                        <property name="text">
+                         <string>Img Y</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="DisplayPointSpinBox" name="img_1_3"/>
+                      </item>
+                     </layout>
+                    </item>
+                    <item row="0" column="0">
+                     <layout class="QFormLayout" name="formLayout_36">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_48">
+                        <property name="text">
+                         <string>Img X</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="DisplayPointSpinBox" name="img_0_3"/>
+                      </item>
+                     </layout>
+                    </item>
+                    <item row="0" column="1">
+                     <layout class="QFormLayout" name="formLayout_37">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_51">
+                        <property name="text">
+                         <string>Robot X</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="DisplayPointDoubleSpinBox" name="robot_0_3"/>
+                      </item>
+                     </layout>
+                    </item>
+                    <item row="1" column="1">
+                     <layout class="QFormLayout" name="formLayout_38">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_52">
+                        <property name="text">
+                         <string>Robot Y</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="DisplayPointDoubleSpinBox" name="robot_1_3"/>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QGroupBox" name="groupBox_11">
+                 <property name="title">
+                  <string>Mapping points</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_15">
+                  <item row="0" column="0">
+                   <layout class="QGridLayout" name="gridLayout_14">
+                    <item row="1" column="0">
+                     <layout class="QFormLayout" name="formLayout_19">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_45">
+                        <property name="text">
+                         <string>Img X</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="DisplayPointSpinBox" name="img_1_1">
+                        <property name="maximum">
+                         <number>400</number>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                    <item row="0" column="1">
+                     <layout class="QFormLayout" name="formLayout_21">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_46">
+                        <property name="text">
+                         <string>Robot X</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="DisplayPointDoubleSpinBox" name="robot_0_1">
+                        <property name="decimals">
+                         <number>3</number>
+                        </property>
+                        <property name="minimum">
+                         <double>-400.000000000000000</double>
+                        </property>
+                        <property name="maximum">
+                         <double>400.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                    <item row="0" column="0">
+                     <layout class="QFormLayout" name="formLayout_20">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_44">
+                        <property name="text">
+                         <string>Img X</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="DisplayPointSpinBox" name="img_0_1">
+                        <property name="maximum">
+                         <number>400</number>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                    <item row="1" column="1">
+                     <layout class="QFormLayout" name="formLayout_22">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_47">
+                        <property name="text">
+                         <string>Robot Y</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="DisplayPointDoubleSpinBox" name="robot_1_1">
+                        <property name="decimals">
+                         <number>3</number>
+                        </property>
+                        <property name="minimum">
+                         <double>-400.000000000000000</double>
+                        </property>
+                        <property name="maximum">
+                         <double>400.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QGroupBox" name="groupBox_13">
+                 <property name="title">
+                  <string>Mapping points</string>
+                 </property>
+                 <layout class="QGridLayout" name="gridLayout_17">
+                  <item row="0" column="0">
+                   <layout class="QGridLayout" name="gridLayout_16">
+                    <item row="0" column="1">
+                     <layout class="QFormLayout" name="formLayout_27">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_38">
+                        <property name="text">
+                         <string>Robot X</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="DisplayPointDoubleSpinBox" name="robot_0_2">
+                        <property name="decimals">
+                         <number>3</number>
+                        </property>
+                        <property name="minimum">
+                         <double>-400.000000000000000</double>
+                        </property>
+                        <property name="maximum">
+                         <double>400.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                    <item row="0" column="0">
+                     <layout class="QFormLayout" name="formLayout_26">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_36">
+                        <property name="text">
+                         <string>Img X</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="DisplayPointSpinBox" name="img_0_2">
+                        <property name="maximum">
+                         <number>500</number>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                    <item row="1" column="0">
+                     <layout class="QFormLayout" name="formLayout_23">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_37">
+                        <property name="text">
+                         <string>Img Y</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="DisplayPointSpinBox" name="img_1_2">
+                        <property name="maximum">
+                         <number>500</number>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                    <item row="1" column="1">
+                     <layout class="QFormLayout" name="formLayout_29">
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="label_39">
+                        <property name="text">
+                         <string>Robot Y</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="DisplayPointDoubleSpinBox" name="robot_1_2">
+                        <property name="decimals">
+                         <number>3</number>
+                        </property>
+                        <property name="minimum">
+                         <double>-400.000000000000000</double>
+                        </property>
+                        <property name="maximum">
+                         <double>400.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="4" column="0">
+              <spacer name="verticalSpacer">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="2" column="0">
+              <widget class="QGroupBox" name="groupBox_7">
+               <property name="title">
+                <string>Weight</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_9">
+                <item row="0" column="0">
+                 <layout class="QGridLayout" name="gridLayout_8">
+                  <item row="0" column="0">
+                   <layout class="QFormLayout" name="formLayout_8">
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_27">
+                      <property name="text">
+                       <string>w00</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="DisplayPointDoubleSpinBox" name="w_0_0"/>
+                    </item>
+                   </layout>
+                  </item>
+                  <item row="1" column="0">
+                   <layout class="QFormLayout" name="formLayout_7">
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_19">
+                      <property name="text">
+                       <string>w10</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="DisplayPointDoubleSpinBox" name="w_0_1"/>
+                    </item>
+                   </layout>
+                  </item>
+                  <item row="0" column="2">
+                   <layout class="QFormLayout" name="formLayout_9">
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_28">
+                      <property name="text">
+                       <string>w02</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="DisplayPointDoubleSpinBox" name="w_2_0"/>
+                    </item>
+                   </layout>
+                  </item>
+                  <item row="0" column="1">
+                   <layout class="QFormLayout" name="formLayout_10">
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_29">
+                      <property name="text">
+                       <string>w01</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="DisplayPointDoubleSpinBox" name="w_1_0"/>
+                    </item>
+                   </layout>
+                  </item>
+                  <item row="1" column="2">
+                   <layout class="QFormLayout" name="formLayout_11">
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_30">
+                      <property name="text">
+                       <string>w12</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="DisplayPointDoubleSpinBox" name="w_2_1"/>
+                    </item>
+                   </layout>
+                  </item>
+                  <item row="1" column="1">
+                   <layout class="QFormLayout" name="formLayout_12">
+                    <item row="0" column="0">
+                     <widget class="QLabel" name="label_31">
+                      <property name="text">
+                       <string>w11</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item row="0" column="1">
+                     <widget class="DisplayPointDoubleSpinBox" name="w_1_1"/>
+                    </item>
+                   </layout>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QGroupBox" name="groupBox_8">
+               <property name="title">
+                <string>Controll Buttons</string>
+               </property>
+               <layout class="QGridLayout" name="gridLayout_10">
+                <item row="0" column="0">
+                 <layout class="QGridLayout" name="gridLayout_7">
+                  <item row="1" column="2">
+                   <widget class="QPushButton" name="decrease_x_btn">
+                    <property name="text">
+                     <string>Decrease x</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="2">
+                   <widget class="QPushButton" name="increase_x_btn">
+                    <property name="text">
+                     <string>Increase x</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="3">
+                   <widget class="QPushButton" name="decrease_y_btn">
+                    <property name="text">
+                     <string>Decrease y</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="0">
+                   <widget class="QPushButton" name="add_point_btn">
+                    <property name="text">
+                     <string>Add point</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QPushButton" name="remove_latest_mapping_point_btn">
+                    <property name="text">
+                     <string>Remove latest point</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="1" column="1">
+                   <widget class="QPushButton" name="clear_points_btn">
+                    <property name="text">
+                     <string>Clear Points</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="1">
+                   <widget class="QPushButton" name="testing_btn">
+                    <property name="text">
+                     <string>Testing</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="0" column="3">
+                   <widget class="QPushButton" name="increase_y_btn">
+                    <property name="text">
+                     <string>Increase y</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="2" column="0">
+                   <widget class="QPushButton" name="calculate_weight_btn">
+                    <property name="text">
+                     <string>Calculate Weight</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DoubleSpinBox</class>
+   <extends>QDoubleSpinBox</extends>
+   <header>src/views/components</header>
+  </customwidget>
+  <customwidget>
+   <class>ComboBox</class>
+   <extends>QComboBox</extends>
+   <header>src/views/components</header>
+  </customwidget>
+  <customwidget>
+   <class>SpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>src/views/components</header>
+  </customwidget>
+  <customwidget>
+   <class>Label</class>
+   <extends>QLabel</extends>
+   <header>src/views/components</header>
+  </customwidget>
+  <customwidget>
+   <class>CameraLabel</class>
+   <extends>QLabel</extends>
+   <header>src/views/components</header>
+  </customwidget>
+  <customwidget>
+   <class>DisplayPointSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>src/views/components</header>
+  </customwidget>
+  <customwidget>
+   <class>DisplayPointDoubleSpinBox</class>
+   <extends>QDoubleSpinBox</extends>
+   <header>src/views/components</header>
+  </customwidget>
+  <customwidget>
+   <class>VisionCameraLabel</class>
+   <extends>QLabel</extends>
+   <header location="global">src/views/components</header>
+  </customwidget>
+  <customwidget>
+   <class>CuttingFrameSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>src/views/components</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

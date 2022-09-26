@@ -2,18 +2,16 @@ from PyQt5.QtCore import QThread, pyqtSignal, QRect
 from PyQt5.QtGui import QImage
 from PyQt5.QtCore import Qt
 import cv2 as cv
+from time import time
+from ..models.center_detector import CenterDetector
 
 
 class VisionThread(QThread):
     updated_img = pyqtSignal(QImage)
-    cutting_frame = pyqtSignal(QImage)
     size = (500, 400)
     
     def __init__(self):
         QThread.__init__(self)
-        self._points = []
-        self._boxes = []
-        self._points = []
         self._temp = None
         self._temp_next = None
         self._has_cutting_frame = False
@@ -31,33 +29,29 @@ class VisionThread(QThread):
         capture = cv.VideoCapture(1)
 
         while self.cam_on:
+            start_time = time()
             ret, frame = capture.read()
             if ret: 
                 img = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
                 img = cv.resize(img, self.size)
-                gray_belt = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-
-
-                if self._temp is not None:
-                    self._draw_current_box(img)
-
-                img = self._draw_points(img)
+                
+                img = self._draw_current_box(img)
+                cutted_img = self._cutting_img(img)
+                belt, binary_img = self.controller.model.center_detector.get_center_points(cutted_img)
+                drawed_img = self.controller.model.center_detector.draw_points(img)
 
                 try:
-                    handled_img, binary_img = self._hanlded_gray_img(gray_belt)
-                    self._imshow_binary_frame(handled_img, binary_img)
-                except Exception as e:
-                    print(e)
+                    drawed_img = cv.circle(drawed_img, self.controller.model.predictor.predict(time=1000)[0], 3, (0, 255, 0), -1)
+                except:
+                    pass
 
-                img = self._get_q_image(img)
-                cutting_img = self._cutting_img(img)
-                
+                self._imshow_binary_frame(belt, binary_img)
+                img = self._get_q_image(drawed_img)
                 
                 pic = img.scaled(*self.size, Qt.KeepAspectRatio)
                 self.updated_img.emit(pic)
+                cv.waitKey(1)
 
-                self.cutting_frame.emit(cutting_img)
-                
     def stop(self):
         self.cam_on = False 
         cv.release()
@@ -89,60 +83,19 @@ class VisionThread(QThread):
         except:
             return 0, 0, self.size[0], self.size[1]
 
-    def _hanlded_gray_img(self, img):
-        cutting_img = self._cutting_gray_img(img)
-        _, binary_img = cv.threshold(cutting_img, self._binary_threshold, 255, cv.THRESH_BINARY)
-        blur_img = cv.GaussianBlur(cutting_img, (5, 5), 0)
-        _, belt = cv.threshold(blur_img, 0, 255, cv.THRESH_BINARY+cv.THRESH_OTSU)
-
-        contours, _ = cv.findContours(belt,cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
-        binary_contours, _ = cv.findContours(binary_img, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
-
-        self.controller.model.clear_points()
-        if len(binary_contours) != 0:
-            for contour in contours:
-                self._get_product(contour)
-
-        return belt, binary_img
-
-    def _get_product(self, contour):
-        min_x, min_y, _, _ = self._get_cutting_value()
-        moments = cv.moments(contour)
-        if moments['m00'] == 0:
-            return
-        else:
-            c_x = int(moments['m10']/moments['m00']) + min_x
-            c_y = int(moments['m01']/moments['m00']) + min_y
-            print(c_x, c_y)
-
-            area = cv.contourArea(contour)
-
-            if area > self._limit_area:
-                self.controller.model.add_point((c_x, c_y))
-
-    def _cutting_gray_img(self, img):
-        min_x, min_y, max_x, max_y = self._get_cutting_value()
-        return img[min_y:max_y, min_x:max_x]
-
     def _cutting_img(self, img):
         min_x, min_y, max_x, max_y = self._get_cutting_value()
-        rect = QRect(min_x, min_y, max_x-min_x, max_y-min_y)
-
-        return img.copy(rect)
+        self.controller.model.center_detector.set_shifting_frame((min_x, min_y))
+        return img[min_y:max_y, min_x:max_x, :]
 
     def _draw_current_box(self, img):
         img = cv.rectangle(img, self._temp, self._temp_next, (0, 0, 0), 2)
-
-    def _draw_boxes(self, img):
-        pass
-
-    def _draw_points(self, img):
-        for point in self._points:
-            img = cv.circle(img, point, 4, (0, 0, 0), -1)
-
         return img
 
     def model_is_changed(self, model):
+        if isinstance(model, CenterDetector):
+            return
+
         if model.has_min_point() and model.need_max_point():
             self._temp = model.get_min_point()
             self._temp_next = model.get_current_posistion()
@@ -150,7 +103,6 @@ class VisionThread(QThread):
             self._temp, self._temp_next = model.get_cutting_frame()
             self._has_cutting_frame = True
 
-        self._points = model.get_points()
         self._show_binary_frame = model.show_binary_frame()
         self._limit_area = model.get_values("limit_area")
         self._binary_threshold = model.get_values("binary_threshold")

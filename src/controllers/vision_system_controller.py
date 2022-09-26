@@ -1,24 +1,30 @@
 from ..views import VisionWidget
-from ..models import Model, Command, CoordinateTransformer
+from ..models import Model, Command, CoordinateTransformer, CenterDetector, TrajectoryPredictor
 from ..models.properties import Property, DefaultParam
 from .controller import Controller
+from time import time, sleep
 
 
 
 class VisionSystemModel(Model):
     def __init__(self):
         super().__init__()
-        self._boxes_min_point = []
-        self._boxes_max_point = []
         self._current_pos = (0, 0)
         self._cutting_frame_points = []
         self._points = []
         self._show_binary_frame = False
         self._values = {
-            "limit_area": 700,
-            "binary_threshold": 200
+            "area_threshold": 2000,
+            "binary_threshold": 225,
+            "radius": 3,
+            "speed": 840,
+            "moving_delay": 10,
+            "grabbing_delay": 500, 
+            "predicted_time": 42
         }
         self._grab_loop = False
+        self.center_detector = CenterDetector(values=self._values)
+        self.predictor = TrajectoryPredictor()
 
     def get_grab_loop(self):
         return self._grab_loop
@@ -102,6 +108,14 @@ class VisionSystemController:
         self.model.add_observer(self.win.limit_area_slider)
         self.model.add_observer(self.win.binary_threshold_label)
         self.model.add_observer(self.win.binary_threshold_slider)
+        self.model.add_observer(self.win.speed_label)
+        self.model.add_observer(self.win.speed_slider)
+        self.model.add_observer(self.win.moving_delay_label)
+        self.model.add_observer(self.win.moving_delay_slider)
+        self.model.add_observer(self.win.grabbing_delay_label)
+        self.model.add_observer(self.win.grabbing_delay_slider)
+        self.model.add_observer(self.win.predicted_time_label)
+        self.model.add_observer(self.win.predicted_time_slider)
         self.transformer = CoordinateTransformer()
         self.transformer.load_weight()
 
@@ -120,54 +134,41 @@ class VisionSystemController:
     def show(self):
         self.win.show()
 
-    def _command_to_move_command(self, x_val, y_val, z_val=-700000, speed=1000, delay=0):
-        self.command.reset_command()
-        self.command.set_function(3)
-
-        self.command.set_param(0, Property(num_bytes=4, reverse=True))
-        self.command.set_param_value(0, x_val)
-        self.command.set_param(1, Property(num_bytes=4, reverse=True))
-        self.command.set_param_value(1, y_val)
-        self.command.set_param(2, Property(num_bytes=4, reverse=True))
-        self.command.set_param_value(2, z_val)
-        self.command.set_param(4, Property(num_bytes=4, reverse=True))
-        self.command.set_param_value(4, speed)
-        self.command.set_delay(delay)
-        self.connection_controller.send(self.command.to_hex())
-
-    def _command_to_control_out(self, out_num, is_on=True):
-        self.command.reset_command()
-        self.command.set_function(12)
-        self.command.set_param(0, Property(num_bytes=4, reverse=True))
-        self.command.set_param_value(0, out_num * 1000)
-        self.command.set_param(1, Property(num_bytes=4, reverse=True))
-        self.command.set_param_value(1, 1000 if is_on == True else 0)
-        self.connection_controller.send(self.command.to_hex())
-
-
     def grab_product(self, point):
-        print(point)
+#        first_time = time()
+#
+#        for i in range(self.model.predictor.get_num_data_points()):
+#            time_val = time() - first_time
+#            try:
+#                point = self.model.center_detector.get_current_points()[0]
+#                self.model.predictor.add_point(point, time_val * 1000)
+#            except:
+#                pass
+#
+#            sleep(self.model.predictor.get_sample_time()/1000)
+#
+#        point = self.model.predictor.predict(time=self.model.get_values("predicted_time"))
+
+        point = (point[0] + self.model.get_values("predicted_time"), point[1] + self.model.get_values("moving_delay"))
         point = self.transformer.convert(point)
-        print(point)
 
-        self._command_to_move_command(int(point[0]), int(point[1]), -650000, delay=1000)
-        print(self.command.to_hex())
+        if point[0] > 400000:
+            point = (400000, point[1])
+        if point[0] < -400000:
+            point = (-400000, point[1])
+        if point[1] > 400000:
+            point = (point[0], 400000)
+        if point[1] < -400000:
+            point = (point[0], -400000)
 
-        self._command_to_move_command(int(point[0]), int(point[1]), -775000, delay=1000)
-        print(self.command.to_hex())
+        self.connection_controller.move(int(point[0]), int(point[1]), -700000, delay=1000, speed=self.model.get_values("speed"))
 
-        self._command_to_control_out(1)
-        print(self.command.to_hex())
 
-        self._command_to_move_command(int(point[0]), int(point[1]), -650000, delay=500)
-        print(self.command.to_hex())
+        self.connection_controller.move(int(point[0]), int(point[1]), -775000, delay=self.model.get_values("grabbing_delay"), speed=self.model.get_values("speed"))
+        self.connection_controller.control_out(1)
 
-        self._command_to_move_command(0, 0, -650000, delay=1000)
-        print(self.command.to_hex())
+        self.connection_controller.move(int(point[0]), int(point[1]), -700000, delay=1000, speed=self.model.get_values("speed"))
 
-        self._command_to_control_out(1, is_on=False)
-        print(self.command.to_hex())
+        self.connection_controller.move(-166159, 342836, -650000, delay=1000, speed=self.model.get_values("speed"))
 
-    def grab(self):
-        remain, point = self.model.get_point()
-        self.grab_product(point)
+        self.connection_controller.control_out(1, is_on=False)

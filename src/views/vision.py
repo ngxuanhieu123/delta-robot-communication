@@ -5,6 +5,7 @@ from .vision_thread import VisionThread
 from PyQt5.uic import loadUi
 from .components import EditableLabel, ControllableSlider
 from threading import Thread
+from multiprocessing import Process
 
 
 
@@ -14,18 +15,15 @@ class VisionWidget(QWidget):
         loadUi(ui_dir, self)
         self.controller = controller
         self._run_continuously = False
+        self.command_thread = None
 
         self.normal_image = self.findChild(VisionCameraImage, 'normal_image')
         self.normal_image.set_controller(controller)
         self.normal_image.set_can_add_frame_point(True)
 
-        self.cutting_frame = self.findChild(VisionCameraImage, 'cutting_frame')
-        self.cutting_frame.set_controller(controller)
-
         self.thread = VisionThread()
         self.thread.set_controller(controller)
         self.thread.updated_img.connect(self.update_normal_image)
-        self.thread.cutting_frame.connect(self.update_cutting_frame)
         self.thread.start()
 
         self.show_binary_frame_btn = self.findChild(QPushButton, 'show_binary_frame_btn')
@@ -33,10 +31,10 @@ class VisionWidget(QWidget):
 
         self.limit_area_label = self.findChild(EditableLabel, 'limit_area_label')
         self.limit_area_label.set_text("Limit Area: ")
-        self.limit_area_label.set_updated_key("limit_area")
+        self.limit_area_label.set_updated_key("area_threshold")
 
         self.limit_area_slider = self.findChild(ControllableSlider, 'limit_area_slider')
-        self.limit_area_slider.set_updated_key("limit_area")
+        self.limit_area_slider.set_updated_key("area_threshold")
         self.limit_area_slider.set_controller(controller)
 
         self.binary_threshold_label = self.findChild(EditableLabel, "binary_threshold_label")
@@ -47,8 +45,37 @@ class VisionWidget(QWidget):
         self.binary_threshold_slider.set_updated_key("binary_threshold")
         self.binary_threshold_slider.set_controller(controller)
 
-        self.run_once_btn = self.findChild(QPushButton, 'run_once_btn')
-        self.run_once_btn.clicked.connect(self.grab_obj)
+        self.speed_label = self.findChild(EditableLabel, "speed_label")
+        self.speed_label.set_text("Speed: ")
+        self.speed_label.set_updated_key("speed")
+
+        self.speed_slider = self.findChild(ControllableSlider, "speed_slider")
+        self.speed_slider.set_updated_key("speed")
+        self.speed_slider.set_controller(controller)
+
+        self.moving_delay_label = self.findChild(EditableLabel, "moving_delay_label")
+        self.moving_delay_label.set_text("Y adaptie: ")
+        self.moving_delay_label.set_updated_key("moving_delay")
+
+        self.moving_delay_slider = self.findChild(ControllableSlider, "moving_delay_slider")
+        self.moving_delay_slider.set_updated_key("moving_delay")
+        self.moving_delay_slider.set_controller(controller)
+
+        self.grabbing_delay_label = self.findChild(EditableLabel, "grabbing_delay_label")
+        self.grabbing_delay_label.set_text("Grabbing Delay: ")
+        self.grabbing_delay_label.set_updated_key("grabbing_delay")
+
+        self.grabbing_delay_slider = self.findChild(ControllableSlider, "grabbing_delay_slider")
+        self.grabbing_delay_slider.set_updated_key("grabbing_delay")
+        self.grabbing_delay_slider.set_controller(controller)
+
+        self.predicted_time_label = self.findChild(EditableLabel, "predicted_time_label")
+        self.predicted_time_label.set_text("X adapt: ")
+        self.predicted_time_label.set_updated_key("predicted_time")
+
+        self.predicted_time_slider = self.findChild(ControllableSlider, "predicted_time_slider")
+        self.predicted_time_slider.set_updated_key("predicted_time")
+        self.predicted_time_slider.set_controller(controller)
 
         self.run_continuously_btn = self.findChild(QPushButton, "run_continuously_btn")
         self.run_continuously_btn.clicked.connect(self.grab_continuously)
@@ -64,25 +91,31 @@ class VisionWidget(QWidget):
 
     def _grab_product(self):
         while self._run_continuously:
-            try:
-                self.controller.grab_product(self.controller.model.get_points()[0])
-            except Exception as e:
-                print(e)
+            if len(self.controller.model.center_detector.get_current_points()) != 0:
+                try:
+                    self.controller.grab_product(self.controller.model.center_detector.get_current_points()[0])
+                except Exception as e:
+                    print(e)
 
     def grab_obj(self):
         try:
-            thread = Thread(target=self.controller.grab_product, args=(self.controller.model.get_points()[0], ))
-            thread.start()
+            self.command_thread = Thread(target=self.controller.grab_product)
+            self.command_thread.start()
         except Exception as e:
             print(e)
 
     def grab_continuously(self):
         self._run_continuously = True
         try:
-            thread = Thread(target=self._grab_product)
-            thread.start()
+            self.command_thread = Thread(target=self._grab_product)
+            self.command_thread.start()
         except Exception as e:
             print(e)
 
     def stop_run_continuously(self):
         self._run_continuously = False
+        try:
+            self.command_thread.join()
+        except Exception as e:
+            print(e)
+
