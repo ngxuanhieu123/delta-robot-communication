@@ -16,6 +16,8 @@ class Response:
 
         obj.function = int.from_bytes(obj.function, 'big')
         obj.value = int.from_bytes(obj.value, 'big')
+        if obj.value > 2 ** (4 * 8 - 1):
+            obj.value = - (2 ** (4 * 8) - obj.value)
 
 
 if __name__ == "__main__":

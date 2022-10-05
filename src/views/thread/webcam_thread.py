@@ -48,7 +48,14 @@ class WebcamThread(QThread):
 
                 self.updated_img.emit(mapping_pic)
                 self.vision_img.emit(vision_pic)
-            self.controller.run()
+#            if len(self.controller.detector.tracker.picking_hub) > 0:
+#                print(self.controller.detector.tracker.picking_hub)
+
+#            if len(self.controller.detector.tracker.picking_hub) > 0:
+#                print(f"[DEBUG] Picking Hub: {self.controller.detector.tracker.picking_hub}get_function()")
+
+            if self.controller.picking and not self.controller.picking_stm and len(self.controller.model.get_value("points")) > 0:
+                self.controller.run()
 
     def _preprocess_img(self, img):
         img = cv.cvtColor(img, cv.COLOR_BGR2RGB)
@@ -104,7 +111,8 @@ class WebcamThread(QThread):
             min_x, min_y, max_x, max_y = self._get_frame_box()
             img = cv.rectangle(img, [min_x, min_y], [max_x, max_y], color, thickness)
 
-        img = self._draw_points_on_img(img, points, point_color)
+        img = self.controller.detector.draw_bnd_boxes(img)
+        img = self.controller.detector.draw_points(img, self.controller)
 
         img = self._draw_catch_line(img)
 
@@ -146,7 +154,10 @@ class WebcamThread(QThread):
 
     def _draw_points_on_img(self, img, points, color):
         for point in points:
-            img = cv.circle(img, point, 3, color, -1)
+            try:
+                img = cv.circle(img, point, 3, color, -1)
+            except:
+                img = cv.circle(img, point[0], 3, color, -1)
         return img
 
     def stop(self):

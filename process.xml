@@ -1,174 +1,36 @@
 <commands>
     <command>
-        <name>control pos</name>
-        <address>3</address>
-        <delay>1000</delay>
-        <parameters>
-            <parameter>
-                <name>X value (multipled by 1000)</name>
-                <reverse>True</reverse>
-                <index>0</index>
-                <value>-70323</value>
-            </parameter>
-            <parameter>
-                <name>Y value (multipled by 1000)</name>
-                <reverse>True</reverse>
-                <index>1</index>
-                <value>-220522</value>
-            </parameter>
-            <parameter>
-                <name>Z value (multipled by 1000)</name>
-                <reverse>True</reverse>
-                <index>2</index>
-                <value>-709832</value>
-            </parameter>
-            <parameter>
-                <name>Speed (multipled by 1000)</name>
-                <reverse>True</reverse>
-                <index>4</index>
-                <value>1000</value>
-            </parameter>
-        </parameters>
-    </command>
-    <command>
-        <name>control pos</name>
-        <delay>800</delay>
-        <address>3</address>
-        <parameters>
-            <parameter>
-                <name>X value (multipled by 1000)</name>
-                <reverse>True</reverse>
-                <index>0</index>
-                <value>-70323</value>
-            </parameter>
-            <parameter>
-                <name>Y value (multipled by 1000)</name>
-                <reverse>True</reverse>
-                <index>1</index>
-                <value>-220522</value>
-            </parameter>
-            <parameter>
-                <name>Z value (multipled by 1000)</name>
-                <reverse>True</reverse>
-                <index>2</index>
-                <value>-746704</value>
-            </parameter>
-            <parameter>
-                <name>Speed (multipled by 1000)</name>
-                <reverse>True</reverse>
-                <index>4</index>
-                <value>1000</value>
-            </parameter>
-        </parameters>
-    </command>
-    <command>
-        <name>open out</name>
-        <address>12</address>
-        <parameters>
-            <parameter>
-                <name>output channel</name>
-                <index>0</index>
-                <reverse>True</reverse>
-                <value>1000</value>
-            </parameter>
-            <parameter>
-                <name>turn on</name>
-                <index>1</index>
-                <reverse>True</reverse>
-                <value>1000</value>
-            </parameter>
-        </parameters>
-    </command>
-    <command>
-        <name>control pos</name>
-        <address>3</address>
-        <delay>1000</delay>
-        <parameters>
-            <parameter>
-                <name>X value (multipled by 1000)</name>
-                <reverse>True</reverse>
-                <index>0</index>
-                <value>-70323</value>
-            </parameter>
-            <parameter>
-                <name>Y value (multipled by 1000)</name>
-                <reverse>True</reverse>
-                <index>1</index>
-                <value>-220522</value>
-            </parameter>
-            <parameter>
-                <name>Z value (multipled by 1000)</name>
-                <reverse>True</reverse>
-                <index>2</index>
-                <value>-709832</value>
-            </parameter>
-            <parameter>
-                <name>Speed (multipled by 1000)</name>
-                <reverse>True</reverse>
-                <index>4</index>
-                <value>1000</value>
-            </parameter>
-        </parameters>
-    </command>
-    <command>
-        <name>control pos</name>
-        <address>3</address>
-        <delay>1000</delay>
-        <parameters>
-            <parameter>
-                <name>X value (multipled by 1000)</name>
-                <reverse>True</reverse>
-                <index>0</index>
-                <value>311573</value>
-            </parameter>
-            <parameter>
-                <name>Y value (multipled by 1000)</name>
-                <reverse>True</reverse>
-                <index>1</index>
-                <value>-321355</value>
-            </parameter>
-            <parameter>
-                <name>Z value (multipled by 1000)</name>
-                <reverse>True</reverse>
-                <index>2</index>
-                <value>-708290</value>
-            </parameter>
-            <parameter>
-                <name>Speed (multipled by 1000)</name>
-                <reverse>True</reverse>
-                <index>4</index>
-                <value>1000</value>
-            </parameter>
-        </parameters>
-    </command>
-    <command>
-        <name>close out</name>
-        <address>12</address>
-        <parameters>
-            <parameter>
-                <name>output channel</name>
-                <index>0</index>
-                <reverse>True</reverse>
-                <value>1000</value>
-            </parameter>
-            <parameter>
-                <name>turn on</name>
-                <index>1</index>
-                <reverse>True</reverse>
-                <value>0</value>
-            </parameter>
-        </parameters>
-    </command>
-    <command>
-        <name>stop</name>
-        <address>6</address>
-        <parameters></parameters>
-    </command>
-    <command>
         <name>reset</name>
         <delay>1000</delay>
         <address>4</address>
         <parameters>
+        </parameters>
+    </command>
+    <command>
+        <name>move</name>
+        <delay>1000</delay>
+        <address>3</address>
+        <parameters>
+            <parameter>
+                <name>X value</name>
+                <index>0</index>
+                <value>100000</value>
+            </parameter>
+            <parameter>
+                <name>Y value</name>
+                <index>1</index>
+                <value>-100000</value>
+            </parameter>
+            <parameter>
+                <name>Z value</name>
+                <index>2</index>
+                <value>-700000</value>
+            </parameter>
+            <parameter>
+                <name>speed</name>
+                <index>4</index>
+                <value>1000</value>
+            </parameter>
         </parameters>
     </command>
 </commands>

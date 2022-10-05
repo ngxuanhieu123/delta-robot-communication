@@ -34,10 +34,10 @@ class DisplayPointSpinBox(SpinBox):
         
     def model_is_changed(self, model):
         value = model.get_value(self._topic)
-        if self._id < len(value):
+        try:
             self.setDisabled(False)
             self.setValue(value[self._id][self._index_column])
-        else:
+        except Exception as e:
             self.setDisabled(True)
             self.setValue(0)
 

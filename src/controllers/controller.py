@@ -1,8 +1,9 @@
 import socket
 from ..utils import create_a_socket_client
-from ..models import Command
+from ..models import Command, Response
 from ..models.properties import Property, DefaultParam
-from time import sleep
+from time import sleep, time
+import numpy as np 
 
 
 class Controller:
@@ -33,13 +34,17 @@ class Controller:
         self.client.send(msg)
         result = self.client.recv(100)
         if self.command is not None:
+            first_time = time()
+            print(f"[DEBUG] Delay start for msg: {msg}")
             self.command.delay()
+            print(f"[DEBUG] Delay end for msg: {msg} - Cosuming time: {time() - first_time}")
         return result
 
     def set_function(self, function):
         self.command.set_function(function)
 
     def disconnect(self):
+        print("[INFO]Disconnect")
         self.client.close()
 
     def set_params(self, params):
@@ -68,6 +73,7 @@ class Controller:
             print(f"[ERROR] {e}")
 
     def move(self, x_val, y_val, z_val=-700000, speed=1000, delay=0, controller=None):
+        print(f"[INFO] Start moving x: {x_val} - y: {y_val} - z: {z_val} - speed: {speed} - delay: {delay}")
         self._update_param(controller)
         self.command.reset_command()
         self.set_function(3)
@@ -85,7 +91,6 @@ class Controller:
         self.command.set_param(4, Property(num_bytes=4, reverse=True))
         self.command.set_param_value(4, speed)
         self.command.set_delay(delay)
-        print(self._connected)
         if self.is_connected():
             self.send(self.command.to_hex())
         else:
@@ -99,6 +104,7 @@ class Controller:
             self._y_value = y_val
             controller.model.set_value("current_z", z_val/1000)
             self._z_value = z_val
+        print(f"[INFO] Finish moving")
 
     def control_out(self, out_num, is_on=True, delay=0, controller=None):
         self.command.reset_command()
@@ -112,6 +118,16 @@ class Controller:
             self.send(self.command.to_hex())
         else:
             print(self.command.to_hex())
+
+    def get_current_encoder_value(self):
+        self.command.reset_command()
+        self.command.set_function(14)
+        response = self.send(self.command.to_hex())
+
+        response_obj = Response()
+        Response.from_bytes(response_obj, response)
+
+        return response_obj.get_value()
 
     def reset(self):
         self.command.reset_command()
@@ -139,6 +155,7 @@ class Controller:
     def decrease_z(self, step=10000, speed=1000, delay=300, controller=None):
         self.move(self._x_value, self._y_value, self._z_value - step, speed=speed, delay=delay, controller=controller)
 
+
     def pick_and_place(self, data, controller=None):
         x_val = data["x_val"]
         y_val = data["y_val"]
@@ -155,12 +172,37 @@ class Controller:
         moving_delay = data["moving_delay"]
         grabbing_delay = data["grabbing_delay"]
 
-        self.move(x_val, y_val, z_val_high, speed=moving_speed, delay=moving_delay, controller=controller)
-        self.move(x_val, y_val, z_val_low, speed=grabbing_speed, delay=grabbing_delay, controller=controller)
+        catch_first_speed = data["catch_first_speed"]
+        catch_first_delay = data["catch_first_delay"]
+
+        catch_second_speed = data["catch_second_speed"]
+        catch_second_delay = data["catch_second_delay"]
+
+        unit_factor = data["unit_factor"]
+
+        encoder = data["encoder"]
+
+        print(f"[INFO] Pick and place x: {data}")
+
+        self.move(100000, y_val, z_val_high, speed=moving_speed, delay=moving_delay, controller=controller)
+
+        current_encoder = self.get_current_encoder_value()
+        adapt_x = int(abs(current_encoder - encoder) * unit_factor * 1000)
+        print(f"[DEBUG] Adapt x: {adapt_x}")
+        self.move(x_val - adapt_x, y_val, z_val_high, speed=catch_first_speed, delay=catch_first_delay, controller=controller)
+        print(f"[DEBUG] Current encoder: {current_encoder}")
+
+        current_encoder = self.get_current_encoder_value()
+        adapt_x = int(abs(current_encoder - encoder) * unit_factor * 1000)
+        print(f"[DEBUG] Adapt x: {adapt_x}")
+        self.move(x_val - adapt_x, y_val, z_val_low, speed=catch_second_speed, delay=catch_second_delay, controller=controller)
+        print(f"[DEBUG] Current encoder: {current_encoder}")
+
         self.control_out(1, is_on=True, delay=10)
-        self.move(x_val, y_val, z_val_high, speed=moving_speed, delay=moving_delay, controller=controller)
         self.move(x_val_target, y_val_target, z_val_target, speed=moving_speed, delay=moving_delay, controller=controller)
         self.control_out(1, is_on=False, delay=50)
 
+
+        print("[INFO] Pick and place finish")
         if controller is not None:
             controller.picking_stm = False

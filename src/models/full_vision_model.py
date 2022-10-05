@@ -32,6 +32,11 @@ class FullVisionModel(Model):
             "x_val_target": 200.000,
             "y_val_target": 400.000,
             "z_val_target": -700.000,
+            "catch_first_speed": 300,
+            "catch_first_delay": 1500,
+            "catch_second_speed": 300,
+            "catch_second_delay": 100,
+            "unit_factor": 0.125,
             "moving_speed": 1000,
             "grabbing_speed": 1000,
             "moving_delay": 500,
@@ -69,6 +74,8 @@ class FullVisionModel(Model):
             "cutting_frame_color": {"options": COLORS, "value": "White"},
             "cutting_frame_thickness": 1,
             "points": [],
+            "encoder_value": 0,
+            "angles": [],
             "show_binary_frame": False,
             "center_point_color": {"options": COLORS, "value": "Red"}
         }

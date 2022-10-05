@@ -37,40 +37,48 @@ class FullVisionController:
         return in_dict
 
     def run(self):
-        if self.picking:
-            name, direction = self.model.get_value("line_direction", is_combo_box=True)
-            catch_line = self.model.get_value("catch_line")
-            adapt_x = self.model.get_value("adapt_x")
+        name, direction = self.model.get_value("line_direction", is_combo_box=True)
+        catch_line = self.model.get_value("catch_line")
+        adapt_x = self.model.get_value("adapt_x")
 
-            points = self.model.get_value("points")
-            data = {}
-            data = self._get_params_by_keys(["moving_speed", "moving_delay", "grabbing_speed", 
-                            "grabbing_delay"], data)
-            data = self._get_params_by_keys(["z_val_low", "z_val_high", "x_val_target",
-                            "y_val_target", "z_val_target"], data, multiple_by_thousand=True)
+        points = self.model.get_value("points")
+        encoder_value = self.connection.get_current_encoder_value()
+        data = {}
+        data = self._get_params_by_keys(["moving_speed", "moving_delay", "grabbing_speed", 
+                        "grabbing_delay", "catch_first_speed",
+                        "catch_first_delay", "catch_second_speed", 
+                        "catch_second_delay", "unit_factor"], data)
+        data = self._get_params_by_keys(["z_val_low", "z_val_high", "x_val_target",
+                        "y_val_target", "z_val_target"], data, multiple_by_thousand=True)
+        print(f"[INFO] Run picking picking_stm: {self.picking_stm} - picking: {self.picking}")
 
-            for point in points:
-                if not self.picking_stm:
-                    if name == "Horizontal":
-                        if point[1] < catch_line:
-                            x_val, y_val = self.convert([point[0], point[1] + adapt_x])
-                            x_real_val = int(round(x_val * 1000))
-                            y_real_val = int(round(y_val * 1000))
-                            data["x_val"] = x_real_val
-                            data["y_val"] = y_real_val
-                            self.picking_stm = True
-                            thread = Thread(target=self.connection.pick_and_place, args=(data, ), kwargs={"controller": self})
-                            thread.start()
-                    elif name == "Vertical":
-                        if point[0] > catch_line:
-                            x_val, y_val = self.transformer.convert([point[0] + adapt_x, point[1]])
-                            x_real_val = int(round(x_val * 1000))
-                            y_real_val = int(round(y_val * 1000))
-                            data["x_val"] = x_real_val
-                            data["y_val"] = y_real_val
-                            self.picking_stm = True
-                            thread = Thread(target=self.connection.pick_and_place, args=(data, ), kwargs={"controller": self})
-                            thread.start()
+        try:
+            point = points[0]
+            if name == "Horizontal":
+                if point[1] < catch_line:
+                    self.picking_stm = True
+                    x_val, y_val = self.convert([point[0], point[1]])
+                    x_real_val = int(round(x_val * 1000))
+                    y_real_val = int(round(y_val * 1000))
+                    data["x_val"] = x_real_val
+                    data["y_val"] = y_real_val
+                    data["encoder"] = encoder_value
+                    thread = Thread(target=self.connection.pick_and_place, args=(data, ), kwargs={"controller": self})
+                    thread.start()
+            elif name == "Vertical":
+                if point[0] > catch_line:
+                    self.picking_stm = True
+                    x_val, y_val = self.transformer.convert([point[0], point[1]])
+                    x_real_val = int(round(x_val * 1000))
+                    y_real_val = int(round(y_val * 1000))
+                    data["x_val"] = x_real_val
+                    data["y_val"] = y_real_val
+                    data["encoder"] = encoder_value
+                    thread = Thread(target=self.connection.pick_and_place, args=(data, ), kwargs={"controller": self})
+                    thread.start()
+        except Exception as e:
+            print(f"[ERROR] {e}")
+            print(e)
             
     def create_connection(self):
         address_property = Property()

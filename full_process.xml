@@ -94,3 +94,31 @@
         </parameters>
     </command>
 </commands>
+
+
+    <command>
+        <name>move</name>
+        <address>3</address>
+        <parameters>
+            <parameter>
+                <name>X value</name>
+                <index>0</index>
+                <value>100000</value>
+            </parameter>
+            <parameter>
+                <name>Y value</name>
+                <index>1</index>
+                <value>-100000</value>
+            </parameter>
+            <parameter>
+                <name>Z value</name>
+                <index>2</index>
+                <value>-700000</value>
+            </parameter>
+            <parameter>
+                <name>speed</name>
+                <index>4</index>
+                <value>1000</value>
+            </parameter>
+        </parameters>
+    </command>

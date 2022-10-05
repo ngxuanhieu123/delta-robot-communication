@@ -19,10 +19,10 @@ class FullVisionWidget(QWidget):
 
         double_spin_boxes = ['current_x', 'current_y', 'current_z', 
                     'speed', 'x_min', 'x_max', 'y_min', 'y_max', 
-                    'z_min', 'z_max', 'encoder_value',
+                    'z_min', 'z_max',
                     'origin_x', 'origin_y', 'origin_z', "z_val_low", 
                     "z_val_high", "x_val_target", "y_val_target",
-                    "z_val_target"]
+                    "z_val_target", "unit_factor"]
         self.config(DoubleSpinBox, double_spin_boxes)
 
         combo_boxes = ['image_size', 'kernel', 'cam_id', 'cutting_frame_color', 'center_point_color',
@@ -31,7 +31,8 @@ class FullVisionWidget(QWidget):
 
         spin_boxes = ['area_threshold', 'binary_threshold', "cutting_frame_x_min", "cutting_frame_x_max", 
                 "cutting_frame_y_min", "cutting_frame_y_max", "cutting_frame_thickness", "catch_line", "adapt_x",
-                "moving_speed", "moving_delay", "grabbing_delay", "grabbing_speed"]
+                "moving_speed", "moving_delay", "grabbing_delay", "grabbing_speed",
+                "catch_first_speed", "catch_first_delay", "catch_second_speed", "catch_second_delay"]
         self.config(SpinBox, spin_boxes)
 
         labels = ['config_file']

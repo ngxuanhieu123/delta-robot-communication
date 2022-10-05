@@ -46,7 +46,7 @@
             </widget>
            </item>
            <item>
-            <layout class="QGridLayout" name="gridLayout_20">
+            <layout class="QGridLayout" name="gridLayout_20" rowstretch="1,1" columnstretch="1,1" rowminimumheight="1,1" columnminimumwidth="1,1">
              <item row="0" column="0">
               <widget class="QGroupBox" name="groupBox_9">
                <property name="title">
@@ -376,6 +376,40 @@
                     </property>
                    </widget>
                   </item>
+                  <item row="5" column="0">
+                   <widget class="QLabel" name="label_71">
+                    <property name="text">
+                     <string>Catch First Speed</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="0">
+                   <widget class="QLabel" name="label_72">
+                    <property name="text">
+                     <string>Catch First delay</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="5" column="1">
+                   <widget class="SpinBox" name="catch_first_speed">
+                    <property name="maximum">
+                     <number>1000</number>
+                    </property>
+                    <property name="singleStep">
+                     <number>100</number>
+                    </property>
+                   </widget>
+                  </item>
+                  <item row="6" column="1">
+                   <widget class="SpinBox" name="catch_first_delay">
+                    <property name="maximum">
+                     <number>5000</number>
+                    </property>
+                    <property name="singleStep">
+                     <number>500</number>
+                    </property>
+                   </widget>
+                  </item>
                  </layout>
                 </item>
                </layout>
@@ -495,6 +529,57 @@
                  </property>
                  <property name="singleStep">
                   <double>10.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="0">
+                <widget class="QLabel" name="label_73">
+                 <property name="text">
+                  <string>Catch Second Speed</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="0">
+                <widget class="QLabel" name="label_74">
+                 <property name="text">
+                  <string>Catch Second delay</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="1">
+                <widget class="SpinBox" name="catch_second_speed">
+                 <property name="maximum">
+                  <number>1000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>100</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="7" column="1">
+                <widget class="SpinBox" name="catch_second_delay">
+                 <property name="maximum">
+                  <number>5000</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>500</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="0">
+                <widget class="QLabel" name="label_75">
+                 <property name="text">
+                  <string>Unit factor</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="8" column="1">
+                <widget class="DoubleSpinBox" name="unit_factor">
+                 <property name="decimals">
+                  <number>4</number>
+                 </property>
+                 <property name="maximum">
+                  <double>50.000000000000000</double>
                  </property>
                 </widget>
                </item>
